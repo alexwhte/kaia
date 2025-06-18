@@ -83,20 +83,23 @@ Data Models & Schemas,Data Architect,"You are a Data Architect defining **Data M
  - [ ] Includes field types
  - [ ] Shows constraints
  - [ ] Clear relationships"
-Parsing & NLP Logic,ML Engineer,"You are an ML Engineer defining **Parsing & NLP Logic**.
- 
+Parsing & NLP Logic,Data Engineer,"You are a Data Engineer writing the **Parsing & NLP Logic** section.
 
- Document the parsing and NLP approach including:
- 1. Algorithm choices and rationale
- 2. Precision/recall targets
- 3. Fallback strategies
- 4. Model training requirements
- 5. Performance benchmarks
+Focus on practical text parsing using OpenAI's GPT models rather than complex NLP pipelines:
 
- Focus on the technical implementation details.","Detailed NLP/parsing specification.","- [ ] Algorithm choices explained
- - [ ] Performance targets set
- - [ ] Fallback strategies defined
- - [ ] Training requirements listed"
+1. **Text Processing Approach** - How to use ChatGPT/OpenAI to extract structured data from text
+2. **Prompt Engineering** - How to craft prompts to extract specific information (e.g., restaurant names, locations)
+3. **Data Validation** - How to validate and clean extracted data
+4. **Error Handling** - How to handle cases where extraction fails or is unclear
+
+Keep it simple and practical. The goal is to use AI to parse text, not build complex NLP models.
+
+Format as a clear explanation with examples of prompts and expected outputs.","Clear explanation of using AI for text parsing with prompt examples.","- [ ] Uses OpenAI/GPT approach
+ - [ ] Includes prompt examples
+ - [ ] Covers data validation
+ - [ ] Addresses error handling
+ - [ ] Practical and simple
+ - [ ] No complex NLP models"
 Edge-Case & Error Handling,DevOps Engineer,"You are a DevOps Engineer defining **Edge-Case & Error Handling**.
  
 
@@ -126,20 +129,23 @@ Non-Functional Requirements,Performance Engineer,"You are a Performance Engineer
  - [ ] Scalability metrics defined
  - [ ] Availability SLAs set
  - [ ] Security requirements listed"
-Security & Privacy,Security Engineer,"You are a Security Engineer defining **Security & Privacy** requirements.
- 
+Security & Privacy,Backend Engineer,"You are a Backend Engineer writing the **Security & Privacy** section.
 
- Document security measures including:
- 1. Authentication & authorization
- 2. Data encryption (at rest/transit)
- 3. Privacy compliance (GDPR, CCPA)
- 4. API security
- 5. Incident response procedures
+Focus on practical, essential security measures that are actually needed for this project:
 
- Include specific technical implementations.","Comprehensive security specification.","- [ ] Auth mechanisms defined
- - [ ] Encryption requirements
- - [ ] Compliance measures
- - [ ] Incident procedures"
+1. **Basic Authentication** - How users will log in (OAuth, email/password, etc.)
+2. **Data Protection** - How sensitive data is handled (encryption, secure storage)
+3. **API Security** - How external API calls are secured (API keys, rate limiting)
+4. **User Privacy** - Basic privacy considerations (what data is collected, user consent)
+
+Keep it concise and practical. Avoid over-engineering with complex compliance frameworks unless specifically required.
+
+Format as a clear, structured list with brief explanations.","Structured list of essential security measures with brief explanations.","- [ ] Covers basic authentication
+ - [ ] Addresses data protection
+ - [ ] Includes API security
+ - [ ] Mentions user privacy
+ - [ ] Practical and concise
+ - [ ] No over-engineering"
 Observability & Monitoring,Site Reliability Engineer,"You are a Site Reliability Engineer defining **Observability & Monitoring**.
  
 

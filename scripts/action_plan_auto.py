@@ -41,11 +41,93 @@ if args.prd_file and os.path.exists(args.prd_file):
     with open(args.prd_file, "r") as f:
         prd_context = f.read().strip()
 
-# Create base context with full technical spec content
-base_context = f"Technical Specification:\n{tech_spec_content}"
+# Parse technical spec to extract key sections
+def extract_spec_sections(spec_content):
+    """Extract key sections from technical spec content"""
+    sections = {}
+    current_section = None
+    current_content = []
+    
+    lines = spec_content.split('\n')
+    for line in lines:
+        if line.startswith('## '):
+            # Save previous section
+            if current_section:
+                sections[current_section] = '\n'.join(current_content).strip()
+            # Start new section
+            current_section = line[3:].strip()
+            current_content = []
+        elif current_section:
+            current_content.append(line)
+    
+    # Save last section
+    if current_section:
+        sections[current_section] = '\n'.join(current_content).strip()
+    
+    return sections
 
+# Parse PRD to extract key sections
+def extract_prd_sections(prd_content):
+    """Extract key sections from PRD content"""
+    sections = {}
+    current_section = None
+    current_content = []
+    
+    lines = prd_content.split('\n')
+    for line in lines:
+        if line.startswith('## '):
+            # Save previous section
+            if current_section:
+                sections[current_section] = '\n'.join(current_content).strip()
+            # Start new section
+            current_section = line[3:].strip()
+            current_content = []
+        elif current_section:
+            current_content.append(line)
+    
+    # Save last section
+    if current_section:
+        sections[current_section] = '\n'.join(current_content).strip()
+    
+    return sections
+
+spec_sections = extract_spec_sections(tech_spec_content)
+
+# Define key sections for action plan context (most important for planning)
+key_spec_sections = [
+    "Purpose & Scope",
+    "Key Components", 
+    "External Integrations & APIs",
+    "Implementation Roadmap",
+    "Open Questions & Assumptions"
+]
+
+# Create focused context with only key sections
+base_context_parts = []
+for section in key_spec_sections:
+    if section in spec_sections:
+        base_context_parts.append(f"Technical Spec {section}:\n{spec_sections[section]}")
+
+base_context = "\n\n".join(base_context_parts)
+
+# Add key PRD sections if available
 if prd_context:
-    base_context += f"\n\nPRD Context:\n{prd_context}"
+    prd_sections = extract_prd_sections(prd_context)
+    
+    # Define key PRD sections for action planning
+    key_prd_sections = [
+        "Product Overview",
+        "User Requirements",
+        "Metrics & KPIs"
+    ]
+    
+    prd_context_parts = []
+    for section in key_prd_sections:
+        if section in prd_sections:
+            prd_context_parts.append(f"PRD {section}:\n{prd_sections[section]}")
+    
+    if prd_context_parts:
+        base_context += f"\n\nPRD Context:\n" + "\n\n".join(prd_context_parts)
 
 # Generate Initial Setup Checklist
 setup_prompt = f"""You are a Technical Project Manager creating an **Initial Setup Checklist** for a development team.

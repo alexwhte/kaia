@@ -1,13 +1,25 @@
-# PRD Automation Tool
+# Kaia: Automated Product Requirements & Technical Planning Tool
 
-A comprehensive automation tool that generates Product Requirements Documents (PRD), Technical Specifications, and Action Plans from CSV input files using OpenAI's GPT-4.
+Kaia is a unified command-line tool that generates Product Requirements Documents (PRD), Technical Specifications, and Action Plans from your product idea using OpenAI's GPT-4.
+
+## Overview
+
+Kaia is designed as part of a broader automation pipeline that transforms product ideas into actionable development tasks:
+
+1. **Product Idea** → **PRD** (business requirements and user needs)
+2. **PRD** → **Technical Specification** (system architecture and technical requirements)
+3. **Technical Specification** → **Action Plan** (implementation strategy and setup tasks)
+4. **Action Plan** → **TaskMaster** (detailed task breakdown for development teams)
+5. **TaskMaster** → **Cursor/Development Tools** (code generation and implementation)
+
+This pipeline ensures that your product vision flows seamlessly from high-level requirements down to specific development tasks, with each step building on the previous one to maintain context and alignment.
 
 ## Project Structure
 
 ```
-prd_auto/
+kaia/
 ├── scripts/                    # Python automation scripts
-│   ├── prd_auto.py            # Generate PRD from CSV input
+│   ├── prd_auto.py            # Generate PRD from text input
 │   ├── spec_auto.py           # Generate Technical Spec from PRD
 │   ├── action_plan_auto.py    # Generate Action Plan from Technical Spec
 │   └── master_auto.py         # Master script to run all three
@@ -17,6 +29,7 @@ prd_auto/
 ├── requirements.txt           # Python dependencies
 ├── .env                       # Environment variables (create this)
 ├── .gitignore                 # Git ignore rules
+├── kaia                       # Unified CLI entry point
 └── README.md                  # This file
 ```
 
@@ -27,7 +40,7 @@ prd_auto/
 ```bash
 # Clone the repository
 git clone <your-repo-url>
-cd prd_auto
+cd kaia
 
 # Install dependencies
 pip install -r requirements.txt
@@ -36,43 +49,55 @@ pip install -r requirements.txt
 echo "OPENAI_API_KEY=your_api_key_here" > .env
 ```
 
-### 2. Run the Complete Pipeline
+### 2. Usage: The `kaia` Command
 
+Kaia provides a single command with subcommands for each step of the workflow:
+
+#### **Full Pipeline (default)**
 ```bash
-# Generate all documents from CSV input
-python3 scripts/master_auto.py your_input.csv
-
-# Or with custom version suffix
-python3 scripts/master_auto.py your_input.csv --version v1
-
-# Skip specific steps if you have existing files
-python3 scripts/master_auto.py your_input.csv --skip-prd --skip-spec
+./kaia your_product_idea.txt
+# or
+./kaia all your_product_idea.txt
 ```
+- **Input:** Text file with your product idea
+- **Output:** PRD, Technical Spec, and Action Plan in the `output/` folder
 
-### 3. Run Individual Scripts
-
+#### **Generate PRD only**
 ```bash
-# Generate PRD only
-python3 scripts/prd_auto.py your_input.csv
+./kaia prd your_product_idea.txt
+```
+- **Input:** Text file with your product idea
+- **Output:** PRD markdown file in `output/`
 
-# Generate Technical Spec from existing PRD
-python3 scripts/spec_auto.py output/prd_20241201_143022.md
+#### **Generate Technical Spec only**
+```bash
+./kaia spec output/prd_YYYYMMDD_HHMMSS.md
+```
+- **Input:** PRD markdown file (generated from previous step)
+- **Output:** Technical Specification markdown file in `output/`
 
-# Generate Action Plan from existing Technical Spec
-python3 scripts/action_plan_auto.py output/technical_specification_20241201_143022.md --prd-file output/prd_20241201_143022.md
+#### **Generate Action Plan only**
+```bash
+./kaia action output/technical_specification_YYYYMMDD_HHMMSS.md --prd-file output/prd_YYYYMMDD_HHMMSS.md
+```
+- **Input:** Technical Specification markdown file (required), PRD markdown file (optional for extra context)
+- **Output:** Action Plan markdown file in `output/`
+
+#### **Options for All Commands**
+- `--version v1` — Add a custom version suffix to output files
+- `--skip-prd`, `--skip-spec`, `--skip-action-plan` — Skip steps (for `all` pipeline only)
+
+### 3. Input Format
+
+Create a text file with your product idea. Example:
+
+```
+A social media analytics tool that helps small businesses understand their audience 
+and optimize their content strategy. The tool should analyze engagement patterns, 
+identify trending topics, and provide actionable insights for content creation.
 ```
 
-## Input Format
-
-Create a CSV file with your product idea. Example:
-
-```csv
-Section,Role Emulated,Prompt Instruction,Output Format,Acceptance Criteria
-Product Overview,Product Manager,"Create a comprehensive product overview for a social media analytics tool","Clear, concise overview with key value propositions","Includes problem statement, solution, and target audience"
-User Requirements,UX Designer,"Define detailed user requirements and use cases","Structured list of user stories and requirements","Covers primary user personas and their needs"
-```
-
-## Output Files
+### 4. Output Files
 
 All generated files are saved in the `output/` directory with timestamp-based versioning:
 
@@ -82,10 +107,11 @@ All generated files are saved in the `output/` directory with timestamp-based ve
 
 ## Features
 
+- **Unified CLI**: One command for the full pipeline or any step
 - **Automated Pipeline**: Generate all documents in sequence
 - **Version Control**: Automatic timestamp-based versioning
-- **Flexible Input**: Support for any CSV-formatted product idea
-- **Modular Design**: Run individual scripts or the complete pipeline
+- **Flexible Input**: Support for any text-formatted product idea
+- **Modular Design**: Run individual steps or the complete pipeline
 - **Action Planning**: Includes setup checklists and TaskMaster integration
 - **Clean Output**: Professional markdown formatting
 
@@ -117,31 +143,22 @@ Install with: `pip install -r requirements.txt`
 
 ## Usage Examples
 
-### Complete Pipeline
+### Full Pipeline
 ```bash
-# Generate everything from a product idea
-python3 scripts/master_auto.py my_product_idea.csv
+./kaia my_product_idea.txt
 ```
 
 ### Individual Steps
 ```bash
-# Just the PRD
-python3 scripts/prd_auto.py my_product_idea.csv
-
-# Technical spec from existing PRD
-python3 scripts/spec_auto.py output/prd_20241201_143022.md
-
-# Action plan from existing spec
-python3 scripts/action_plan_auto.py output/technical_specification_20241201_143022.md
+./kaia prd my_product_idea.txt
+./kaia spec output/prd_YYYYMMDD_HHMMSS.md
+./kaia action output/technical_specification_YYYYMMDD_HHMMSS.md
 ```
 
-### Skip Steps
+### Skip Steps (Pipeline Only)
 ```bash
-# Use existing PRD, generate spec and action plan
-python3 scripts/master_auto.py my_product_idea.csv --skip-prd
-
-# Use existing PRD and spec, generate only action plan
-python3 scripts/master_auto.py my_product_idea.csv --skip-prd --skip-spec
+./kaia all my_product_idea.txt --skip-prd
+./kaia all my_product_idea.txt --skip-prd --skip-spec
 ```
 
 ## Next Steps
@@ -156,12 +173,11 @@ After generating your documents:
 
 ## Troubleshooting
 
-<<<<<<< HEAD
 - **API Key Issues**: Ensure your `.env` file contains a valid OpenAI API key
 - **Token Limits**: The scripts are optimized to handle large documents efficiently
 - **File Not Found**: Make sure input files exist and paths are correct
-- **Permission Errors**: Ensure you have write permissions for the output directory 
-=======
+- **Permission Errors**: Ensure you have write permissions for the output directory
+
 ## Output
 
 All generated files are saved to the `output/` folder by default with automatic versioning.
@@ -240,7 +256,7 @@ The master script creates a JSON summary file containing:
 - **Bullet points**: Used for better readability in scope sections
 - **Succinct content**: Focused on essential information without overwhelming detail
 - **Confident but friendly tone**: Makes technical content more engaging
-- 
+
 ## Development Notes
 
 ### Python Command Usage
@@ -266,4 +282,3 @@ All scripts use CSV template files that define the structure and prompts for eac
 - The action plan provides immediate next steps for development teams
 - TaskMaster integration enables seamless transition from planning to execution
 - The master script provides a complete automation workflow with versioning 
->>>>>>> 26849b9144910edc4054cd14e32893af59fd23ce

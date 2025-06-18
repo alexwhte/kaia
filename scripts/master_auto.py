@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Master script to run the complete PRD automation pipeline:
-1. Generate PRD from CSV input
+1. Generate PRD from text input
 2. Generate Technical Specification from PRD
 3. Generate Action Plan from Technical Specification
 """
@@ -30,9 +30,28 @@ def run_script(script_name, args):
             print(result.stderr)
         return False
 
+def get_next_version(output_dir, base_filename):
+    """Get the next version number for a file"""
+    if not os.path.exists(output_dir):
+        return 1
+    
+    # Look for existing files with version numbers
+    existing_files = []
+    for file in os.listdir(output_dir):
+        if file.startswith(base_filename.replace('.md', '')):
+            # Extract version number from filename like "prd_1.md" -> 1
+            parts = file.replace('.md', '').split('_')
+            if len(parts) >= 2 and parts[-1].isdigit():
+                existing_files.append(int(parts[-1]))
+    
+    if not existing_files:
+        return 1
+    
+    return max(existing_files) + 1
+
 def main():
     parser = argparse.ArgumentParser(description='Run complete PRD automation pipeline')
-    parser.add_argument('input_file', help='Path to the input CSV file (e.g., prd_instructions.csv)')
+    parser.add_argument('input_file', help='Path to the input text file containing the product idea')
     parser.add_argument('--skip-prd', action='store_true', help='Skip PRD generation')
     parser.add_argument('--skip-spec', action='store_true', help='Skip technical specification generation')
     parser.add_argument('--skip-action-plan', action='store_true', help='Skip action plan generation')
@@ -43,8 +62,9 @@ def main():
     if args.version:
         version_suffix = f"_{args.version}"
     else:
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        version_suffix = f"_{timestamp}"
+        # Use simple incremental numbering
+        prd_version = get_next_version('output', 'prd')
+        version_suffix = f"_{prd_version}"
 
     # Ensure output directory exists
     os.makedirs('output', exist_ok=True)
@@ -52,7 +72,7 @@ def main():
     # Step 1: Generate PRD
     if not args.skip_prd:
         prd_output = f"output/prd{version_suffix}.md"
-        if not run_script('prd_auto.py', [args.input_file, '--output', prd_output]):
+        if not run_script('scripts/prd_auto.py', [args.input_file, '--output', prd_output]):
             print("❌ Pipeline failed at PRD generation")
             sys.exit(1)
     else:
@@ -67,7 +87,7 @@ def main():
     # Step 2: Generate Technical Specification
     if not args.skip_spec:
         spec_output = f"output/technical_specification{version_suffix}.md"
-        if not run_script('spec_auto.py', [prd_output, '--output', spec_output]):
+        if not run_script('scripts/spec_auto.py', [prd_output, '--output', spec_output]):
             print("❌ Pipeline failed at technical specification generation")
             sys.exit(1)
     else:
@@ -82,7 +102,7 @@ def main():
     # Step 3: Generate Action Plan
     if not args.skip_action_plan:
         action_plan_output = f"output/action_plan{version_suffix}.md"
-        if not run_script('action_plan_auto.py', [spec_output, '--prd-file', prd_output, '--output', action_plan_output]):
+        if not run_script('scripts/action_plan_auto.py', [spec_output, '--prd-file', prd_output, '--output', action_plan_output]):
             print("❌ Pipeline failed at action plan generation")
             sys.exit(1)
     else:

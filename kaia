@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# Kaia unified CLI
+# Usage: kaia [prd|spec|action|all] [args...]
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/scripts" && pwd)"
+
+# If first argument is a subcommand, use it; otherwise default to 'all'
+case "$1" in
+  prd|spec|action|all)
+    subcommand="$1"
+    shift
+    ;;
+  *)
+    # No subcommand provided, default to 'all' and keep all arguments
+    subcommand="all"
+    ;;
+esac
+
+case "$subcommand" in
+  prd)
+    python3 "$SCRIPT_DIR/prd_auto.py" "$@"
+    ;;
+  spec)
+    python3 "$SCRIPT_DIR/spec_auto.py" "$@"
+    ;;
+  action)
+    python3 "$SCRIPT_DIR/action_plan_auto.py" "$@"
+    ;;
+  all)
+    python3 "$SCRIPT_DIR/master_auto.py" "$@"
+    ;;
+  *)
+    echo "Usage: kaia [prd|spec|action|all] [args...]"
+    echo "  prd     Generate PRD from product idea text file"
+    echo "  spec    Generate Technical Spec from PRD markdown file"
+    echo "  action  Generate Action Plan from Technical Spec markdown file"
+    echo "  all     Run the full pipeline (default)"
+    exit 1
+    ;;
+esac 
