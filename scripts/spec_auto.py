@@ -48,47 +48,8 @@ if args.product_idea and os.path.exists(args.product_idea):
     with open(args.product_idea, "r") as f:
         product_idea_context = f.read().strip()
 
-# Parse PRD content to extract key sections
-def extract_prd_sections(prd_content):
-    """Extract key sections from PRD content"""
-    sections = {}
-    current_section = None
-    current_content = []
-    
-    lines = prd_content.split('\n')
-    for line in lines:
-        if line.startswith('## '):
-            # Save previous section
-            if current_section:
-                sections[current_section] = '\n'.join(current_content).strip()
-            # Start new section
-            current_section = line[3:].strip()
-            current_content = []
-        elif current_section:
-            current_content.append(line)
-    
-    # Save last section
-    if current_section:
-        sections[current_section] = '\n'.join(current_content).strip()
-    
-    return sections
-
-prd_sections = extract_prd_sections(prd_content)
-
-# Define key PRD sections that are most important for technical spec
-key_prd_sections = [
-    "Product Overview",
-    "User Requirements", 
-    "High-Level Technical Architecture"
-]
-
-# Create base context with key PRD sections
-base_context_parts = []
-for section in key_prd_sections:
-    if section in prd_sections:
-        base_context_parts.append(f"PRD {section}:\n{prd_sections[section]}")
-
-base_context = "\n\n".join(base_context_parts)
+# Create base context with full PRD content
+base_context = f"PRD Content:\n{prd_content}"
 
 if product_idea_context:
     base_context += f"\n\nOriginal Product Idea:\n{product_idea_context}"

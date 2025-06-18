@@ -41,10 +41,11 @@ if args.prd_file and os.path.exists(args.prd_file):
     with open(args.prd_file, "r") as f:
         prd_context = f.read().strip()
 
-# Create context
-context = f"Technical Specification:\n{tech_spec_content}"
+# Create base context with full technical spec content
+base_context = f"Technical Specification:\n{tech_spec_content}"
+
 if prd_context:
-    context += f"\n\nPRD Context:\n{prd_context}"
+    base_context += f"\n\nPRD Context:\n{prd_context}"
 
 # Generate Initial Setup Checklist
 setup_prompt = f"""You are a Technical Project Manager creating an **Initial Setup Checklist** for a development team.
@@ -62,7 +63,7 @@ Include:
 Format as a clear checklist with categories. Focus on actionable items that can be completed by the team.
 
 Context:
-{context}"""
+{base_context}"""
 
 print("Generating Initial Setup Checklist...")
 
@@ -87,7 +88,7 @@ Based on the technical specification provided, create a comprehensive TaskMaster
 The prompt should be structured to work with TaskMaster's capabilities and should help the team create a detailed project plan.
 
 Context:
-{context}"""
+{base_context}"""
 
 print("Generating TaskMaster Prompt...")
 
@@ -112,7 +113,7 @@ For each feature, briefly explain why it's categorized as MVP or not.
 Focus on helping the team understand what to build first vs what can come later.
 
 Context:
-{context}"""
+{base_context}"""
 
 print("Generating MVP Breakdown...")
 
