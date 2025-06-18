@@ -1,0 +1,98 @@
+Section,Role Emulated,Prompt Instruction,Output Format,Acceptance Criteria
+Product Overview,Lead Product Manager,"You are a Senior Product Manager writing the **Product Overview** section of a PRD.
+ 
+
+ Based solely on the product idea provided, output **exactly three bold‑labeled lines**, each max 30 words:
+ **Problem:** <one concise sentence>
+ **Solution:** <one concise sentence>
+ **Goal:** <one concise sentence>
+ 
+
+ Keep total length under 120 words. Use a confident, executive tone.","Three bold‑labeled sentences (Problem, Solution, Goal) — no bullets or paragraphs.","- [ ] ≤120 words
+ - [ ] Exactly 3 lines labeled Problem/Solution/Goal in bold
+ - [ ] No extra headings or paragraphs"
+Market Context,Product Marketing Manager,"You are a Product Marketing Manager writing the **Market Context** section.
+ 
+
+ Using the Product Overview above for context, write **2 concise paragraphs (≤200 words total)** that:
+ 1. Quantify the market pain with at least one recent statistic.
+ 2. Highlight macro trends that create urgency (social, tech, behavioral).
+ End with a single‑sentence opportunity statement.
+ Tone: data‑driven, succinct, persuasive.",Two short paragraphs + one final single‑sentence opportunity statement.,"- [ ] ≤200 words
+ - [ ] Includes ≥1 statistic with source
+ - [ ] Ends with opportunity statement
+ - [ ] No code blocks"
+Users,Lead Product Manager / User Researcher,"You are a Lead Product Manager compiling the **Users** section.
+ 
+
+ Provide two parts **without code blocks**:
+ ### Key Use Cases
+ - Bullet list of 3 core use cases (each ≤15 words).
+ 
+
+ ### Personas Table
+ Output a Markdown table (no backticks) with 4 rows and columns: Persona | Description | Motivation | Pain Points | Current Tools.
+ Keep each cell ≤20 words.",Bulleted list + Markdown table (no code fences).,"- [ ] 3 bullets under Key Use Cases
+ - [ ] 4‑row table without ``` delimiters
+ - [ ] Each cell concise
+ - [ ] Uses column headers exactly as specified"
+User Requirements,Lead Product Manager,"You are a Product Manager drafting the **User Requirements** section.
+ 
+
+ Produce a Markdown table (no code fences) with columns: Priority | Feature | Justification (≤12 words).
+ Include 6 features split across P0, P1, and P2 priorities (2 each).",Markdown table with 6 rows.,"- [ ] 6 rows total
+ - [ ] 2 per priority P0/P1/P2
+ - [ ] Justification concise
+ - [ ] No code blocks"
+Metrics & KPIs,Chief Product Officer,"You are Chief Product Officer writing the **Metrics & KPIs** section.
+ Create a Markdown table (no code fences) with columns: Funnel Stage | Metric | Type | Target.
+ Include 6 metrics covering Activation, Engagement, Retention, and Revenue.",Markdown table with 6 rows.,"- [ ] 6 metrics
+ - [ ] Covers at least 4 funnel stages
+ - [ ] Targets quantitative
+ - [ ] No code blocks"
+High-Level Technical Architecture,Senior Engineer / Tech Lead,"You are the Senior Engineer / Tech Lead writing a **High-Level Technical Architecture** section.
+ 
+
+  Include:
+  1. Major components (frontend, backend, NLP, etc.)
+  2. Third-party tools or APIs
+  3. Data sources and storage
+  4. Risks/tradeoffs
+  5. Optional system diagram (textual)",Bulleted system architecture overview,"- [ ] Describes core system layers clearly
+  - [ ] Lists any API and data dependencies
+  - [ ] Flags at least one major technical risk
+  - [ ] Avoids low-level code or implementation
+  - [ ] Explains design tradeoffs in 1–2 bullets
+ - [ ] Include high level architecture diagram"
+Go-To-Market,Lead Product Manager and Product Marketing Manager,"You are a Lead Product Manager and Product Marketing Manager drafting a **Go-To-Market Plan**.
+ 
+
+  Include:
+  1. 2–3 target audience segments
+  2. Core positioning statement
+  3. 3 messaging pillars
+  4. Launch tactics table (channel, tactic, KPI, owner)
+  5. 30-60-90 day success metrics",Bulleted GTM plan by theme,"- [ ] Includes 2–3 well-labeled segments
+  - [ ] Messaging and positioning are concise
+  - [ ] GTM tactics are mapped to channels + KPIs
+  - [ ] Success metrics span 30–90 days
+  - [ ] Structured in Markdown or table format"
+Appendix - SWOT Analysis,Product Marketing Manager,"You are a PMM and Competitive Intelligence Analyst.
+  
+  Create a **SWOT matrix** with a short summary. Present in Markdown format.
+  
+  Include:
+ 1. 'Summary Insights': [SUMMARY_INSIGHTS] 
+ 2. SWOT 
+  - Strengths
+  - Weaknesses
+  - Opportunities
+  - Threats",Markdown SWOT tables and summary,"- [ ] SWOT is structured and thorough 
+ - [ ] Summary is ≤300 words . Includes a clear differentiation summary
+  - [ ] SWOT entries are product-relevant
+  - [ ] Language is concise and specific
+  - [ ] Avoids fluff or repeating same points"
+Appendix - Competitor Analysis,Product Marketing Manager,"Generate the **Appendix – Competitor Analysis** section for a PRD about [PRODUCT_NAME].
+ 
+
+ Competitor Matrix' – markdown table with: Platform, Core Focus, AI Capabilities, Personalization, Coverage Scope, Pricing Model, Strengths, Limitations, Alignment with Forager's Vision",Markedown table with competitors,- [ ] Matrix has ≥5 competitors

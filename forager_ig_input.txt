@@ -1,0 +1,10 @@
+Forager helps travelers discover the best places to eat locally when they travel.
+Assume users are looking on instagram reels and finding places to eat. They may save the videos or want to write down places to eat.
+A lot of instagram reels show the top N places to eat in a given location.
+For example a user might be looking up where the best pizza is in Brooklyn. Or the best food in general in NYC. Or the most viral places to eat.
+In any case there are many reels with this information.
+We can start with a simple ability the share a reel to Forager, which automatically parses out those places to eat and stores it somewhere for the user while they travel. It could simply be a note
+The user will want to know the name of the place, the dishes mentioned, and any other summary tip or recommendation from the video transcript. 
+The user will also want to be able to export the places to google maps as flagged favorites with a very brief note about what to eat and any other tips (same as in the notes above). 
+So later while they are in the location and they are walkng around they can see places mentioned nearby them on their google maps. Or they can use the forager app directly to see the list and notes. 
+In the future we can add additional data sources. But we can start with instagram reel sharing and parsing the transcripts. This should be have very similar to Recime.app which users use for recipes. They share a recipe on reels to recime and it saves it, parses out hte ingredients needed and directions for the user, and creates a grocery list. We are doing the same thing but for places to eat. 

@@ -1,0 +1,136 @@
+Section,Role Emulated,Prompt Instruction,Output Format,Acceptance Criteria
+Problem Statement,Lead Product Manager,"You are a Senior Product Manager writing the **Problem Statement** section of a professional PRD.
+ 
+ Based on the following inputs:
+ - Product idea: [text]
+ 
+ Write less than **500 words**. Be precise, avoid fluff, and assume your audience is technical and strategic stakeholders.
+ - Product idea: [text]
+-  Problem: [text]
+ - Proposed solution: [text] 
+
+ Include the following:
+ 1. A clear articulation of the user’s core unmet need
+ 2. An explanation of how current tools fail or fall short
+ 3. Context about the rising urgency or opportunity
+ 4. Examples or citations if appropriate
+ 5. Structured paragraphs with subheadings if necessary",2–3 paragraph narrative,"- [ ] Written in professional, PRD-style tone
+ - [ ] Less than 500 words total
+ - [ ] Clearly defines user pain and context
+ - [ ] Mentions current workarounds and their limitations
+ - [ ] Avoids proposing specific features or implementation
+- [ ] Includes <aside> with slogan at top
+- [ ] Bolded 'Problem', 'Solution', and 'Goal' subheadings
+- [ ] Content is directly tied to core inputs
+- [ ] Written in clear and concise executive tone"
+Opportunity & Strategy,Product Marketing Manager,"You are a Product Marketing Manager writing the **Opportunity & Strategy** section of a PRD.
+
+
+ Write a **450+ word** essay that clearly articulates:
+ 1. The macro trends driving demand for this product
+ 2. Market gaps or competitor failings
+ 3. Strategic alignment with company or user goals
+ 4. How this product fits the current moment ('why now?')
+ 5. Any supporting data or quotes to reinforce positioning",Short essay (2–4 paragraphs),"- [ ] 450+ words in a structured format
+ - [ ] References macro or market trends
+ - [ ] Explains strategic urgency or timing
+ - [ ] Frames clear user and business alignment
+- [ ] Includes cited market statistics
+- [ ] Names signal sources (e.g., Reddit, blogs)
+- [ ] Explains the role of enabling tech
+- [ ] States the white-space explicitly
+"
+User Personas,Lead Product Manager / User Researcher,"You are a Lead Product Manager creating **User Personas** for a new product.
+
+ Output a **Markdown table** with 2–3 Ideal Customer Profiles (ICPs), each containing:
+ - Name, Age, Location
+ - Description
+ - Motivation
+ - Pains & Frustrations
+ - Behaviors
+ - Current Tools
+ 
+
+ Each persona should feel realistic and backed by user insight or assumptions.",Markdown table of 2 personas,"- [ ] Includes 2–3 personas in a table format
+- [ ] Table has all 5 fields: Persona, Description, Motivation, Pains and Frustrations, Behaviors, Current Tools
+ - [ ] Each persona reflects a clear, believable user
+ - [ ] Avoids overly generic descriptions
+ - [ ] Tailored to the specific product use case
+- [ ] Personas reflect distinct or diverse motivations
+- [ ] Section uses clear subheadings"
+User Requirements,Product Manager,"You are a Product Manager defining the **User Requirements** for a new product.
+
+ Organize features by:
+ - Core MVP
+ - Future Roadmap
+ Prioritize from P0 (Must have) P1 (Need to have) P2 (Good to have) P3 (nice to have) 
+
+ Briefly justify each core feature with 1–2 lines explaining the 'why'.",Bulleted features by category + justification,"- [ ] Distinguishes MVP from V1+ roadmap
+ - [ ] Justifies each core feature with reasoning
+ - [ ] Features are clearly written and user-aligned
+ - [ ] Covers at least 6–8 total features
+ - [ ] No technical implementation details
+- [ ] Table has clear P0–P3 priorities
+- [ ] Features are user-facing
+- [ ] Uses concise labels and bullets"
+Metrics & KPIs,Head of Product,"You are a Head of Product defining **Success Metrics**.
+
+ Organize KPIs by funnel stage:
+ - Activation
+ - Engagement
+ - Retention
+ - Revenue (if applicable)
+
+ Each metric should include a name, type (quant/qual), and benchmark or goal.",Table of metrics by funnel stage,"- [ ] Covers at least 6–8 total metrics
+ - [ ] Each metric includes type and target
+ - [ ] Prioritizes leading indicators of value
+ - [ ] Ties back to product use and adoption
+- [ ] Table has at least 5 rows
+- [ ] PMF indicators are concrete
+- [ ] Metrics tie to stage of the funnel
+- [ ] Includes both quant + qual targets
+- [ ] Uses bold labels for indicators"
+High-Level Technical Architecture,CTO,"You are the CTO writing a **High-Level Technical Architecture** section.
+
+ Include:
+ 1. Major components (frontend, backend, NLP, etc.)
+ 2. Third-party tools or APIs
+ 3. Data sources and storage
+ 4. Risks/tradeoffs
+ 5. Optional system diagram (textual)",Bulleted system architecture overview,"- [ ] Describes core system layers clearly
+ - [ ] Lists any API and data dependencies
+ - [ ] Flags at least one major technical risk
+ - [ ] Avoids low-level code or implementation
+ - [ ] Explains design tradeoffs in 1–2 bullets
+- [ ] Include high level architecture diagram"
+Go-To-Market,Lead Product Manager and Product Marketing Manager,"You are a Lead Product Manager and Product Marketing Manager drafting a **Go-To-Market Plan**.
+
+ Include:
+ 1. 2–3 target audience segments
+ 2. Core positioning statement
+ 3. 3 messaging pillars
+ 4. Launch tactics table (channel, tactic, KPI, owner)
+ 5. 30-60-90 day success metrics",Bulleted GTM plan by theme,"- [ ] Includes 2–3 well-labeled segments
+ - [ ] Messaging and positioning are concise
+ - [ ] GTM tactics are mapped to channels + KPIs
+ - [ ] Success metrics span 30–90 days
+ - [ ] Structured in Markdown or table format"
+Appendix - SWOT Analysis,Product Marketing Manager,"You are a PMM and Competitive Intelligence Analyst.
+ 
+ Create a **SWOT matrix**  with a short summary. Present in Markdown format.
+ 
+ Include:
+1. 'Summary Insights': [SUMMARY_INSIGHTS] 
+2. SWOT 
+  - Strengths
+ -  Weaknesses
+  - Opportunities
+  - Threats",Markdown SWOT tables and summary,"- [ ] SWOT is structured and thorough 
+- [ ] Summary is ≤300 words . Includes a clear differentiation summary
+ - [ ] SWOT entries are product-relevant
+ - [ ] Language is concise and specific
+ - [ ] Avoids fluff or repeating same points"
+Appendix - Competitor Analysis,Product Marketing Manager,"Generate the **Appendix – Competitor Analysis** section for a PRD about [PRODUCT_NAME].
+
+Competitor Matrix' – markdown table with: Platform, Core Focus, AI Capabilities, Personalization, Coverage Scope, Pricing Model, Strengths, Limitations, Alignment with Forager's Vision
+",Markedown table with competitors,- [ ] Matrix has ≥5 competitors
