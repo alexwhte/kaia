@@ -34,5 +34,6 @@ ehthumbs.db
 Thumbs.db
 
 # Output files
+output/
 *.md
 !README.md 

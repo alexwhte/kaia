@@ -2,16 +2,19 @@ Section,Role Emulated,Prompt Instruction,Output Format,Acceptance Criteria
 Purpose & Scope,Technical Product Manager,"You are a Technical Product Manager writing the **Purpose & Scope** section of a Technical Specification.
  
 
- Based on the PRD context provided, write **2-3 concise paragraphs** that:
- 1. Clearly define what is IN scope for this technical build
- 2. Explicitly state what is OUT of scope
- 3. Connect this spec to the broader PRD goals
- 4. Define technical boundaries and constraints
+ Write a clear, concise scope definition that's easy to read and inspiring. Use bullet points for better readability.
 
- Keep total length under 300 words. Use clear, technical language.","2-3 paragraphs with clear scope definition.","- [ ] ≤300 words
- - [ ] Defines in/out scope clearly
- - [ ] Connects to PRD goals
- - [ ] No code blocks"
+ Include:
+ • What's IN scope (2-3 key bullet points)
+ • What's OUT of scope (1-2 bullet points) 
+ • How this connects to the PRD goals
+ • Key technical constraints
+
+ Keep it under 200 words. Use a confident but approachable tone - avoid overly formal language like 'aforementioned' or 'thereby'. Make it feel exciting and achievable.","Clear scope with bullet points and inspiring tone.","- [ ] ≤200 words
+ - [ ] Uses bullet points for readability
+ - [ ] Confident but approachable tone
+ - [ ] No overly formal language
+ - [ ] Clear in/out scope definition"
 High-Level Architecture Diagram,Senior Software Architect,"You are a Senior Software Architect creating a **High-Level Architecture Diagram** section.
  
 
@@ -33,10 +36,10 @@ Data Flow & Sequence Diagrams,Systems Engineer,"You are a Systems Engineer creat
  2. Data processing pipeline
  3. External API interactions
 
- Use Mermaid syntax or structured text format. Focus on the most critical flows.","2-3 sequence diagrams in Mermaid or text format.","- [ ] Covers main user flows
+ Use Mermaid syntax for proper diagramming. Focus on the most critical flows.","Mermaid sequence diagrams with proper syntax.","- [ ] Uses Mermaid syntax
+ - [ ] Covers main user flows
  - [ ] Shows data processing steps
- - [ ] Includes API interactions
- - [ ] Clear step-by-step flow"
+ - [ ] Includes API interactions"
 Key Components,Lead Software Engineer,"You are a Lead Software Engineer defining **Key Components**.
  
 
@@ -166,20 +169,21 @@ Testing & Validation Plan,QA Lead,"You are a QA Lead creating a **Testing & Vali
  - [ ] Specific tools listed
  - [ ] Clear pass criteria
  - [ ] Owners assigned"
-Release & Roll-out Strategy,Release Manager,"You are a Release Manager defining the **Release & Roll-out Strategy**.
+Implementation Roadmap,Technical Product Manager,"You are a Technical Product Manager creating an **Implementation Roadmap**.
  
 
- Create a 3-phase rollout plan including:
- 1. Feature flags and configuration
- 2. Staged rollout percentages
- 3. Rollback procedures
- 4. Success criteria
- 5. Timeline and milestones
+ Create a table mapping PRD User Requirements to technical implementation details:
+ Columns: PRD Requirement | Technical Implementation | Subtasks | MVP Priority (Yes/No)
 
- Include specific dates or conditions.","3-phase rollout plan with timeline.","- [ ] 3 phases defined
- - [ ] Rollback procedures
- - [ ] Success criteria
- - [ ] Timeline specified"
+ For each PRD requirement, specify:
+ - How it will be implemented technically
+ - Key subtasks needed
+ - Whether it's MVP or can come later
+
+ Focus on being succinct and actionable.","Markdown table mapping PRD requirements to implementation.","- [ ] Maps all PRD requirements
+ - [ ] Clear technical implementation
+ - [ ] Identifies subtasks
+ - [ ] MVP priority marked"
 Open Questions & Assumptions,Technical Product Manager,"You are a Technical Product Manager documenting **Open Questions & Assumptions**.
  
 
@@ -189,20 +193,8 @@ Open Questions & Assumptions,Technical Product Manager,"You are a Technical Prod
  3. Dependencies (with timelines)
  4. Risks (with mitigation strategies)
 
- Tag each item with an owner and timeline.","Structured list with owners and timelines.","- [ ] Questions with owners
+ Tag each item with an owner. Remove any specific dates/timelines - let the team decide timing.","Structured list with owners and validation plans.","- [ ] Questions with owners
  - [ ] Assumptions listed
  - [ ] Dependencies tracked
- - [ ] Risks identified"
-Glossary,Technical Writer,"You are a Technical Writer creating a **Glossary** section.
- 
-
- Create an alphabetical glossary of:
- 1. Technical acronyms
- 2. Domain-specific terms
- 3. Product terminology
- 4. Industry jargon
-
- Provide clear, concise definitions for each term.","Alphabetical glossary with definitions.","- [ ] Alphabetical order
- - [ ] Clear definitions
- - [ ] Technical terms covered
- - [ ] Concise explanations" 
+ - [ ] Risks identified
+ - [ ] No specific dates" 

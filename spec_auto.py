@@ -3,6 +3,8 @@ import pandas as pd
 import os
 import argparse
 from dotenv import load_dotenv
+import subprocess
+import sys
 
 # Load environment variables from .env file
 load_dotenv()
@@ -11,8 +13,9 @@ load_dotenv()
 parser = argparse.ArgumentParser(description='Generate Technical Specification from PRD file')
 parser.add_argument('prd_file', help='Path to the PRD markdown file (required)')
 parser.add_argument('--template', default='spec_instructions.csv', help='Path to the technical spec template CSV file (default: spec_instructions.csv)')
-parser.add_argument('--output', default='technical_specification.md', help='Path to the output markdown file (default: technical_specification.md)')
+parser.add_argument('--output', default='output/technical_specification.md', help='Path to the output markdown file (default: output/technical_specification.md)')
 parser.add_argument('--product-idea', help='Path to original product idea file for additional context (optional)')
+parser.add_argument('--generate-action-plan', action='store_true', help='Automatically generate action plan after technical specification')
 args = parser.parse_args()
 
 # Initialize OpenAI client with API key from environment variable
@@ -45,13 +48,71 @@ if args.product_idea and os.path.exists(args.product_idea):
     with open(args.product_idea, "r") as f:
         product_idea_context = f.read().strip()
 
-# Start context with PRD content (primary) and product idea (secondary)
-cumulative_context = f"PRD Content:\n{prd_content}"
+# Parse PRD content to extract key sections
+def extract_prd_sections(prd_content):
+    """Extract key sections from PRD content"""
+    sections = {}
+    current_section = None
+    current_content = []
+    
+    lines = prd_content.split('\n')
+    for line in lines:
+        if line.startswith('## '):
+            # Save previous section
+            if current_section:
+                sections[current_section] = '\n'.join(current_content).strip()
+            # Start new section
+            current_section = line[3:].strip()
+            current_content = []
+        elif current_section:
+            current_content.append(line)
+    
+    # Save last section
+    if current_section:
+        sections[current_section] = '\n'.join(current_content).strip()
+    
+    return sections
+
+prd_sections = extract_prd_sections(prd_content)
+
+# Define key PRD sections that are most important for technical spec
+key_prd_sections = [
+    "Product Overview",
+    "User Requirements", 
+    "High-Level Technical Architecture"
+]
+
+# Create base context with key PRD sections
+base_context_parts = []
+for section in key_prd_sections:
+    if section in prd_sections:
+        base_context_parts.append(f"PRD {section}:\n{prd_sections[section]}")
+
+base_context = "\n\n".join(base_context_parts)
+
 if product_idea_context:
-    cumulative_context += f"\n\nOriginal Product Idea:\n{product_idea_context}"
+    base_context += f"\n\nOriginal Product Idea:\n{product_idea_context}"
 
 # Store each output
 section_outputs = {}
+
+# Define context dependencies for spec sections
+context_dependencies = {
+    "Purpose & Scope": [],  # No previous spec sections needed
+    "High-Level Architecture Diagram": [],  # Based on PRD architecture
+    "Data Flow & Sequence Diagrams": ["High-Level Architecture Diagram"],
+    "Key Components": ["High-Level Architecture Diagram"],
+    "External Integrations & APIs": ["Key Components"],
+    "Data Models & Schemas": ["Key Components"],
+    "Parsing & NLP Logic": ["Key Components", "Data Models & Schemas"],
+    "Edge-Case & Error Handling": ["Key Components", "External Integrations & APIs"],
+    "Non-Functional Requirements": ["Key Components"],
+    "Security & Privacy": ["External Integrations & APIs", "Data Models & Schemas"],
+    "Observability & Monitoring": ["Key Components", "Non-Functional Requirements"],
+    "Testing & Validation Plan": ["Key Components", "Non-Functional Requirements"],
+    "Implementation Roadmap": ["Key Components", "External Integrations & APIs"],
+    "Open Questions & Assumptions": []  # Can reference any previous sections
+}
 
 # Iterate through each technical spec section
 for _, row in df.iterrows():
@@ -60,6 +121,17 @@ for _, row in df.iterrows():
     prompt_instruction = row["Prompt Instruction"]
     output_format = row["Output Format"]
     acceptance = row["Acceptance Criteria"]
+
+    # Build context with base context and dependent sections
+    dependent_sections = []
+    if section in context_dependencies:
+        for dep_section in context_dependencies[section]:
+            if dep_section in section_outputs:
+                dependent_sections.append(f"--- {dep_section} ---\n{section_outputs[dep_section]}")
+    
+    cumulative_context = base_context
+    if dependent_sections:
+        cumulative_context += f"\n\nDependent Sections:\n" + "\n\n".join(dependent_sections)
 
     # Build full prompt
     full_prompt = f"""{prompt_instruction}
@@ -86,13 +158,15 @@ Acceptance Criteria:
 
     output = response.choices[0].message.content
 
-    # Store and extend context
+    # Store output
     section_outputs[section] = output
-    cumulative_context += f"\n\n--- {section} ---\n{output}"
 
     print(f"\n--- {section.upper()} COMPLETE ---\n")
     print(output)
     print("\n" + "="*60 + "\n")
+
+# Ensure output directory exists
+os.makedirs(os.path.dirname(args.output), exist_ok=True)
 
 # Write to markdown file
 with open(args.output, "w") as out_file:
@@ -100,4 +174,29 @@ with open(args.output, "w") as out_file:
     out_file.write("This document provides detailed technical specifications based on the Product Requirements Document (PRD).\n\n")
     
     for section, content in section_outputs.items():
-        out_file.write(f"## {section}\n\n{content}\n\n") 
+        out_file.write(f"## {section}\n\n{content}\n\n")
+
+# Generate action plan if requested
+if args.generate_action_plan:
+    print("\nGenerating Action Plan...")
+    try:
+        # Call the action plan script
+        action_plan_cmd = [
+            sys.executable, 'action_plan_auto.py',
+            args.output,
+            '--prd-file', args.prd_file,
+            '--output', 'output/action_plan.md'
+        ]
+        
+        if args.product_idea:
+            action_plan_cmd.extend(['--product-idea', args.product_idea])
+        
+        result = subprocess.run(action_plan_cmd, capture_output=True, text=True)
+        
+        if result.returncode == 0:
+            print("✅ Action Plan generated successfully: output/action_plan.md")
+        else:
+            print(f"❌ Error generating action plan: {result.stderr}")
+            
+    except Exception as e:
+        print(f"❌ Error generating action plan: {e}") 

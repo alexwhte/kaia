@@ -11,7 +11,7 @@ load_dotenv()
 parser = argparse.ArgumentParser(description='Generate PRD from input file')
 parser.add_argument('input_file', help='Path to the input text file containing the product idea')
 parser.add_argument('--template', default='prd_instructions.csv', help='Path to the PRD template CSV file (default: prd_instructions.csv)')
-parser.add_argument('--output', default='full_prd_output.md', help='Path to the output markdown file (default: full_prd_output.md)')
+parser.add_argument('--output', default='output/prd.md', help='Path to the output markdown file (default: output/prd.md)')
 args = parser.parse_args()
 
 # Initialize OpenAI client with API key from environment variable
@@ -81,6 +81,9 @@ Acceptance Criteria:
     print(f"\n--- {section.upper()} COMPLETE ---\n")
     print(output)
     print("\n" + "="*60 + "\n")
+
+# Ensure output directory exists
+os.makedirs(os.path.dirname(args.output), exist_ok=True)
 
 # Write to markdown file (without acceptance criteria)
 with open(args.output, "w") as out_file:
