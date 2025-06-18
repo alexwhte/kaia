@@ -53,17 +53,18 @@ Metrics & KPIs,Chief Product Officer,"You are Chief Product Officer writing the 
 High-Level Technical Architecture,Senior Engineer / Tech Lead,"You are the Senior Engineer / Tech Lead writing a **High-Level Technical Architecture** section.
  
 
-  Include:
-  1. Major components (frontend, backend, NLP, etc.)
-  2. Third-party tools or APIs
-  3. Data sources and storage
-  4. Risks/tradeoffs
-  5. Optional system diagram (textual)",Bulleted system architecture overview,"- [ ] Describes core system layers clearly
-  - [ ] Lists any API and data dependencies
-  - [ ] Flags at least one major technical risk
-  - [ ] Avoids low-level code or implementation
-  - [ ] Explains design tradeoffs in 1–2 bullets
- - [ ] Include high level architecture diagram"
+ Provide a concise technical overview including:
+ 1. **System Overview** (2-3 sentences on the overall architecture)
+ 2. **Key Components** (bullet list of 4-5 major components)
+ 3. **Architecture Diagram** (simple ASCII/text diagram showing component relationships)
+ 4. **Technical Stack** (brief list of main technologies)
+ 5. **Integration Points** (key external APIs/services)
+
+ Keep total length under 400 words. Focus on high-level understanding, not implementation details.","Concise technical overview with diagram and component list.","- [ ] ≤400 words
+ - [ ] Includes system overview
+ - [ ] Shows architecture diagram
+ - [ ] Lists key technologies
+ - [ ] No implementation details"
 Go-To-Market,Lead Product Manager and Product Marketing Manager,"You are a Lead Product Manager and Product Marketing Manager drafting a **Go-To-Market Plan**.
  
 

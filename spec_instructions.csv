@@ -1,0 +1,208 @@
+Section,Role Emulated,Prompt Instruction,Output Format,Acceptance Criteria
+Purpose & Scope,Technical Product Manager,"You are a Technical Product Manager writing the **Purpose & Scope** section of a Technical Specification.
+ 
+
+ Based on the PRD context provided, write **2-3 concise paragraphs** that:
+ 1. Clearly define what is IN scope for this technical build
+ 2. Explicitly state what is OUT of scope
+ 3. Connect this spec to the broader PRD goals
+ 4. Define technical boundaries and constraints
+
+ Keep total length under 300 words. Use clear, technical language.","2-3 paragraphs with clear scope definition.","- [ ] ≤300 words
+ - [ ] Defines in/out scope clearly
+ - [ ] Connects to PRD goals
+ - [ ] No code blocks"
+High-Level Architecture Diagram,Senior Software Architect,"You are a Senior Software Architect creating a **High-Level Architecture Diagram** section.
+ 
+
+ Create a textual architecture diagram that shows:
+ 1. Major system components (frontend, backend, databases, external APIs)
+ 2. Data flow between components
+ 3. Key technologies/libraries for each component
+ 4. Clear component boundaries and interfaces
+
+ Use ASCII art or structured text format. Keep it simple but comprehensive.","Textual architecture diagram with component descriptions.","- [ ] Shows all major components
+ - [ ] Includes data flow
+ - [ ] Lists key technologies
+ - [ ] Clear component boundaries"
+Data Flow & Sequence Diagrams,Systems Engineer,"You are a Systems Engineer creating **Data Flow & Sequence Diagrams**.
+ 
+
+ Create 2-3 key sequence diagrams showing:
+ 1. Main user journey flow
+ 2. Data processing pipeline
+ 3. External API interactions
+
+ Use Mermaid syntax or structured text format. Focus on the most critical flows.","2-3 sequence diagrams in Mermaid or text format.","- [ ] Covers main user flows
+ - [ ] Shows data processing steps
+ - [ ] Includes API interactions
+ - [ ] Clear step-by-step flow"
+Key Components,Lead Software Engineer,"You are a Lead Software Engineer defining **Key Components**.
+ 
+
+ Create a detailed table with columns: Component | Responsibility | Technology/Libraries | Owner
+ Include 6-8 major components covering:
+ - Frontend components
+ - Backend services
+ - Data processing modules
+ - External integrations
+
+ Keep each description concise but specific.","Markdown table with 6-8 components.","- [ ] 6-8 components minimum
+ - [ ] Covers all major system parts
+ - [ ] Clear responsibilities
+ - [ ] Specific technologies listed"
+External Integrations & APIs,API Integration Specialist,"You are an API Integration Specialist documenting **External Integrations & APIs**.
+ 
+
+ Create a comprehensive table with columns: Service | Endpoint | Rate Limits | Auth Method | Expected Payload
+ Include all external services:
+ - Social media APIs
+ - Mapping services
+ - AI/ML services
+ - Payment processors
+ - Analytics platforms
+
+ Provide specific details for each integration.","Markdown table with external integrations.","- [ ] Lists all external services
+ - [ ] Includes rate limits
+ - [ ] Specifies auth methods
+ - [ ] Describes payloads"
+Data Models & Schemas,Data Architect,"You are a Data Architect defining **Data Models & Schemas**.
+ 
+
+ Create JSON schema examples for 4-5 core data models including:
+ 1. User data model
+ 2. Content/Post model
+ 3. Location/Place model
+ 4. Analytics/Event model
+ 5. Configuration/Settings model
+
+ Include field types, constraints, and relationships.","JSON schema examples with field descriptions.","- [ ] 4-5 core data models
+ - [ ] Includes field types
+ - [ ] Shows constraints
+ - [ ] Clear relationships"
+Parsing & NLP Logic,ML Engineer,"You are an ML Engineer defining **Parsing & NLP Logic**.
+ 
+
+ Document the parsing and NLP approach including:
+ 1. Algorithm choices and rationale
+ 2. Precision/recall targets
+ 3. Fallback strategies
+ 4. Model training requirements
+ 5. Performance benchmarks
+
+ Focus on the technical implementation details.","Detailed NLP/parsing specification.","- [ ] Algorithm choices explained
+ - [ ] Performance targets set
+ - [ ] Fallback strategies defined
+ - [ ] Training requirements listed"
+Edge-Case & Error Handling,DevOps Engineer,"You are a DevOps Engineer defining **Edge-Case & Error Handling**.
+ 
+
+ Create a comprehensive table with columns: Scenario | Expected Response | Retry Strategy | Alert/Logging
+ Cover critical scenarios:
+ - Network failures
+ - API rate limits
+ - Data validation errors
+ - Partial data scenarios
+ - Security incidents
+
+ Include specific handling strategies for each case.","Markdown table with error scenarios.","- [ ] Covers critical scenarios
+ - [ ] Specific responses defined
+ - [ ] Retry strategies included
+ - [ ] Alert mechanisms specified"
+Non-Functional Requirements,Performance Engineer,"You are a Performance Engineer defining **Non-Functional Requirements**.
+ 
+
+ Specify quantitative requirements for:
+ 1. Performance (response times, throughput)
+ 2. Scalability (concurrent users, data volume)
+ 3. Availability (uptime, SLA)
+ 4. Security (encryption, compliance)
+ 5. Monitoring (metrics, alerting)
+
+ Use specific metrics and targets.","Quantitative non-functional requirements.","- [ ] Specific performance targets
+ - [ ] Scalability metrics defined
+ - [ ] Availability SLAs set
+ - [ ] Security requirements listed"
+Security & Privacy,Security Engineer,"You are a Security Engineer defining **Security & Privacy** requirements.
+ 
+
+ Document security measures including:
+ 1. Authentication & authorization
+ 2. Data encryption (at rest/transit)
+ 3. Privacy compliance (GDPR, CCPA)
+ 4. API security
+ 5. Incident response procedures
+
+ Include specific technical implementations.","Comprehensive security specification.","- [ ] Auth mechanisms defined
+ - [ ] Encryption requirements
+ - [ ] Compliance measures
+ - [ ] Incident procedures"
+Observability & Monitoring,Site Reliability Engineer,"You are a Site Reliability Engineer defining **Observability & Monitoring**.
+ 
+
+ Specify monitoring requirements:
+ 1. Key metrics and KPIs
+ 2. Logging strategy
+ 3. Alert thresholds
+ 4. Dashboard requirements
+ 5. Incident response procedures
+
+ Include specific tools and thresholds.","Detailed monitoring specification.","- [ ] Key metrics defined
+ - [ ] Alert thresholds set
+ - [ ] Dashboard requirements
+ - [ ] Response procedures"
+Testing & Validation Plan,QA Lead,"You are a QA Lead creating a **Testing & Validation Plan**.
+ 
+
+ Create a comprehensive testing strategy table with columns: Test Type | Tool | Owner | Pass Criteria
+ Include:
+ - Unit testing
+ - Integration testing
+ - Performance testing
+ - Security testing
+ - User acceptance testing
+
+ Define specific criteria for each test type.","Markdown table with testing strategy.","- [ ] Covers all test types
+ - [ ] Specific tools listed
+ - [ ] Clear pass criteria
+ - [ ] Owners assigned"
+Release & Roll-out Strategy,Release Manager,"You are a Release Manager defining the **Release & Roll-out Strategy**.
+ 
+
+ Create a 3-phase rollout plan including:
+ 1. Feature flags and configuration
+ 2. Staged rollout percentages
+ 3. Rollback procedures
+ 4. Success criteria
+ 5. Timeline and milestones
+
+ Include specific dates or conditions.","3-phase rollout plan with timeline.","- [ ] 3 phases defined
+ - [ ] Rollback procedures
+ - [ ] Success criteria
+ - [ ] Timeline specified"
+Open Questions & Assumptions,Technical Product Manager,"You are a Technical Product Manager documenting **Open Questions & Assumptions**.
+ 
+
+ Create a structured list of:
+ 1. Open technical questions (with owners)
+ 2. Key assumptions (with validation plans)
+ 3. Dependencies (with timelines)
+ 4. Risks (with mitigation strategies)
+
+ Tag each item with an owner and timeline.","Structured list with owners and timelines.","- [ ] Questions with owners
+ - [ ] Assumptions listed
+ - [ ] Dependencies tracked
+ - [ ] Risks identified"
+Glossary,Technical Writer,"You are a Technical Writer creating a **Glossary** section.
+ 
+
+ Create an alphabetical glossary of:
+ 1. Technical acronyms
+ 2. Domain-specific terms
+ 3. Product terminology
+ 4. Industry jargon
+
+ Provide clear, concise definitions for each term.","Alphabetical glossary with definitions.","- [ ] Alphabetical order
+ - [ ] Clear definitions
+ - [ ] Technical terms covered
+ - [ ] Concise explanations" 
