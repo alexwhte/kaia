@@ -172,12 +172,6 @@ The master script creates a JSON summary file containing:
 
 ## Key Improvements
 
-### Tone & Readability
-- **More approachable language**: Removed overly formal terms like "aforementioned"
-- **Bullet points**: Used for better readability in scope sections
-- **Succinct content**: Focused on essential information without overwhelming detail
-- **Confident but friendly tone**: Makes technical content more engaging
-
 ### Notion Compatibility
 - **Proper formatting**: Key components use sub-bullets for better Notion import
 - **Clean structure**: Avoids formatting issues when copying to Notion
@@ -202,6 +196,12 @@ The master script creates a JSON summary file containing:
 - **Flexible workflow**: Can skip steps or use existing files
 - **Generation tracking**: JSON summaries for audit trail
 
+### Tone & Readability
+- **More approachable language**: Removed overly formal terms like "aforementioned"
+- **Bullet points**: Used for better readability in scope sections
+- **Succinct content**: Focused on essential information without overwhelming detail
+- **Confident but friendly tone**: Makes technical content more engaging
+- 
 ## Development Notes
 
 ### Python Command Usage
