@@ -12,7 +12,7 @@ load_dotenv()
 # Parse command line arguments
 parser = argparse.ArgumentParser(description='Generate Technical Specification from PRD file')
 parser.add_argument('prd_file', help='Path to the PRD markdown file (required)')
-parser.add_argument('--template', default='spec_instructions.csv', help='Path to the technical spec template CSV file (default: spec_instructions.csv)')
+parser.add_argument('--template', default='templates/spec_instructions.csv', help='Path to the technical spec template CSV file (default: templates/spec_instructions.csv)')
 parser.add_argument('--output', default='output/technical_specification.md', help='Path to the output markdown file (default: output/technical_specification.md)')
 parser.add_argument('--product-idea', help='Path to original product idea file for additional context (optional)')
 parser.add_argument('--generate-action-plan', action='store_true', help='Automatically generate action plan after technical specification')

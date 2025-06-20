@@ -39,15 +39,26 @@ def get_next_version(output_dir, base_filename):
     existing_files = []
     for file in os.listdir(output_dir):
         if file.startswith(base_filename.replace('.md', '')):
-            # Extract version number from filename like "prd_1.md" -> 1
+            # Extract version number from filename like "forager_prd_1.md" -> 1
             parts = file.replace('.md', '').split('_')
-            if len(parts) >= 2 and parts[-1].isdigit():
+            if len(parts) >= 3 and parts[-1].isdigit():
                 existing_files.append(int(parts[-1]))
     
     if not existing_files:
         return 1
     
     return max(existing_files) + 1
+
+def extract_product_name(input_file):
+    """Extract product name from input filename"""
+    # Remove path and extension
+    filename = os.path.basename(input_file)
+    product_name = os.path.splitext(filename)[0]
+    
+    # Clean up the name (remove common suffixes)
+    product_name = product_name.replace('_input', '').replace('_idea', '').replace('_product', '')
+    
+    return product_name
 
 def main():
     parser = argparse.ArgumentParser(description='Run complete PRD automation pipeline')
@@ -58,12 +69,15 @@ def main():
     parser.add_argument('--version', help='Version suffix for output files (e.g., v1, v2)')
     args = parser.parse_args()
 
+    # Extract product name from input file
+    product_name = extract_product_name(args.input_file)
+
     # Generate version suffix
     if args.version:
         version_suffix = f"_{args.version}"
     else:
         # Use simple incremental numbering
-        prd_version = get_next_version('output', 'prd')
+        prd_version = get_next_version('output', f'{product_name}_prd')
         version_suffix = f"_{prd_version}"
 
     # Ensure output directory exists
@@ -71,13 +85,13 @@ def main():
 
     # Step 1: Generate PRD
     if not args.skip_prd:
-        prd_output = f"output/prd{version_suffix}.md"
+        prd_output = f"output/{product_name}_prd{version_suffix}.md"
         if not run_script('scripts/prd_auto.py', [args.input_file, '--output', prd_output]):
             print("❌ Pipeline failed at PRD generation")
             sys.exit(1)
     else:
         # Find existing PRD file
-        prd_files = [f for f in os.listdir('output') if f.startswith('prd') and f.endswith('.md')]
+        prd_files = [f for f in os.listdir('output') if f.startswith(f'{product_name}_prd') and f.endswith('.md')]
         if not prd_files:
             print("❌ No existing PRD file found and PRD generation was skipped")
             sys.exit(1)
@@ -86,13 +100,13 @@ def main():
 
     # Step 2: Generate Technical Specification
     if not args.skip_spec:
-        spec_output = f"output/technical_specification{version_suffix}.md"
+        spec_output = f"output/{product_name}_spec{version_suffix}.md"
         if not run_script('scripts/spec_auto.py', [prd_output, '--output', spec_output]):
             print("❌ Pipeline failed at technical specification generation")
             sys.exit(1)
     else:
         # Find existing spec file
-        spec_files = [f for f in os.listdir('output') if f.startswith('technical_specification') and f.endswith('.md')]
+        spec_files = [f for f in os.listdir('output') if f.startswith(f'{product_name}_spec') and f.endswith('.md')]
         if not spec_files:
             print("❌ No existing technical specification file found and spec generation was skipped")
             sys.exit(1)
@@ -101,7 +115,7 @@ def main():
 
     # Step 3: Generate Action Plan
     if not args.skip_action_plan:
-        action_plan_output = f"output/action_plan{version_suffix}.md"
+        action_plan_output = f"output/{product_name}_action{version_suffix}.md"
         if not run_script('scripts/action_plan_auto.py', [spec_output, '--prd-file', prd_output, '--output', action_plan_output]):
             print("❌ Pipeline failed at action plan generation")
             sys.exit(1)

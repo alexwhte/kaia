@@ -1,6 +1,9 @@
 # Environment variables
 .env
 
+# My idea input
+forager_ig_input.txt
+
 # Python
 __pycache__/
 *.py[cod]

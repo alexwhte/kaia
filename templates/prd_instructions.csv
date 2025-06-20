@@ -1,27 +1,21 @@
 Section,Role Emulated,Prompt Instruction,Output Format,Acceptance Criteria
-Product Overview,Lead Product Manager,"You are a Senior Product Manager writing the **Product Overview** section of a PRD.
+Product Overview,Product Manager,"You are a Product Manager writing a **clear and practical Product Overview** for a PRD.
  
+Start with a **one-sentence summary** that simply describes what the product is and does.
 
- Based solely on the product idea provided, output **exactly three bold‑labeled lines**, each max 30 words:
- **Problem:** <one concise sentence>
- **Solution:** <one concise sentence>
- **Goal:** <one concise sentence>
- 
+Then provide **exactly three bold‑labeled sections**:
+**The Problem:** Describe the specific pain point in clear, practical terms
+**The Solution:** Explain how the product solves this problem in concrete terms
+**The Goal:** State the measurable outcome or impact the product aims to achieve
 
- Keep total length under 120 words. Use a confident, executive tone.","Three bold‑labeled sentences (Problem, Solution, Goal) — no bullets or paragraphs.","- [ ] ≤120 words
- - [ ] Exactly 3 lines labeled Problem/Solution/Goal in bold
+Keep it concise and business-focused. Avoid overly inspirational or salesy language. Focus on clarity and practicality.
+
+Total length should be under 150 words.","One-sentence summary followed by three bold‑labeled sections (Problem, Solution, Goal) — no bullets or paragraphs.","- [ ] Starts with clear one-sentence summary
+ - [ ] ≤150 words total
+ - [ ] Exactly 3 sections labeled Problem/Solution/Goal in bold
+ - [ ] Practical, business-focused tone
+ - [ ] No overly inspirational language
  - [ ] No extra headings or paragraphs"
-Market Context,Product Marketing Manager,"You are a Product Marketing Manager writing the **Market Context** section.
- 
-
- Using the Product Overview above for context, write **2 concise paragraphs (≤200 words total)** that:
- 1. Quantify the market pain with at least one recent statistic.
- 2. Highlight macro trends that create urgency (social, tech, behavioral).
- End with a single‑sentence opportunity statement.
- Tone: data‑driven, succinct, persuasive.",Two short paragraphs + one final single‑sentence opportunity statement.,"- [ ] ≤200 words
- - [ ] Includes ≥1 statistic with source
- - [ ] Ends with opportunity statement
- - [ ] No code blocks"
 Users,Lead Product Manager / User Researcher,"You are a Lead Product Manager compiling the **Users** section.
  
 
@@ -36,6 +30,17 @@ Users,Lead Product Manager / User Researcher,"You are a Lead Product Manager com
  - [ ] 4‑row table without ``` delimiters
  - [ ] Each cell concise
  - [ ] Uses column headers exactly as specified"
+Market Context,Product Marketing Manager,"You are a Product Marketing Manager writing the **Market Context** section.
+ 
+
+ Using the Product Overview above for context, write **2 concise paragraphs (≤200 words total)** that:
+ 1. Quantify the market pain with at least one recent statistic.
+ 2. Highlight macro trends that create urgency (social, tech, behavioral).
+ End with a single‑sentence opportunity statement.
+ Tone: data‑driven, succinct, persuasive.",Two short paragraphs + one final single‑sentence opportunity statement.,"- [ ] ≤200 words
+ - [ ] Includes ≥1 statistic with source
+ - [ ] Ends with opportunity statement
+ - [ ] No code blocks"
 User Requirements,Lead Product Manager,"You are a Product Manager drafting the **User Requirements** section.
  
 

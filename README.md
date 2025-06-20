@@ -23,19 +23,35 @@ kaia/
 │   ├── spec_auto.py           # Generate Technical Spec from PRD
 │   ├── action_plan_auto.py    # Generate Action Plan from Technical Spec
 │   └── master_auto.py         # Master script to run all three
+├── prompts/                    # Markdown prompt templates
+│   └── action_plan_template.md # Action plan generation template
+├── tests/                      # Test files
+│   └── test_action_plan.py    # Action plan script tests
+├── kaia                        # Unified CLI entry point
+├── templates/                  # CSV instruction templates
+│   ├── prd_instructions.csv   # PRD generation template
+│   └── spec_instructions.csv  # Technical spec generation template
 ├── output/                    # Generated documents (auto-created)
-├── prd_instructions.csv       # PRD generation template
-├── spec_instructions.csv      # Technical spec generation template
 ├── requirements.txt           # Python dependencies
 ├── .env                       # Environment variables (create this)
 ├── .gitignore                 # Git ignore rules
-├── kaia                       # Unified CLI entry point
 └── README.md                  # This file
 ```
 
 ## Quick Start
 
-### 1. Setup
+## Input Format
+
+Create a text file with your product idea. Try to include as much as possible about the problem and proposed solution. Short example:
+
+```
+QuickSplit
+Settling a shared bill is time-consuming and often inaccurate when diners have different dishes or tip habits.
+QuickSplitlets a table of friends snap one photo of the restaurant bill and instantly see what each person owes, including tip—no math, no awkward Venmo debates.
+
+```
+
+### Setup
 
 ```bash
 # Clone the repository
@@ -49,7 +65,7 @@ pip install -r requirements.txt
 echo "OPENAI_API_KEY=your_api_key_here" > .env
 ```
 
-### 2. Usage: The `kaia` Command
+### Usage: The `kaia` Command
 
 Kaia provides a single command with subcommands for each step of the workflow:
 
@@ -87,23 +103,26 @@ Kaia provides a single command with subcommands for each step of the workflow:
 - `--version v1` — Add a custom version suffix to output files
 - `--skip-prd`, `--skip-spec`, `--skip-action-plan` — Skip steps (for `all` pipeline only)
 
-### 3. Input Format
+### Run Individual Scripts
 
-Create a text file with your product idea. Example:
+```bash
+# Generate PRD only
+./kaia prd your_product_idea.txt
 
+# Generate Technical Spec from existing PRD
+./kaia spec output/forager_prd_1.md
+
+# Generate Action Plan from existing Technical Spec
+./kaia action output/forager_spec_1.md --prd-file output/forager_prd_1.md
 ```
-A social media analytics tool that helps small businesses understand their audience 
-and optimize their content strategy. The tool should analyze engagement patterns, 
-identify trending topics, and provide actionable insights for content creation.
-```
 
-### 4. Output Files
+## Output Files
 
-All generated files are saved in the `output/` directory with timestamp-based versioning:
+All generated files are saved in the `output/` directory with simple incremental versioning:
 
-- `prd_YYYYMMDD_HHMMSS.md` - Product Requirements Document
-- `technical_specification_YYYYMMDD_HHMMSS.md` - Technical Specification
-- `action_plan_YYYYMMDD_HHMMSS.md` - Action Plan with setup checklist and TaskMaster prompt
+- `forager_prd_1.md` - Product Requirements Document
+- `forager_spec_1.md` - Technical Specification
+- `forager_action_1.md` - Action Plan with setup checklist and TaskMaster prompt
 
 ## Features
 
@@ -117,10 +136,14 @@ All generated files are saved in the `output/` directory with timestamp-based ve
 
 ## Templates
 
-The tool uses two CSV templates:
+The tool uses templates located in different folders:
 
-1. **prd_instructions.csv** - Defines PRD sections and generation prompts
-2. **spec_instructions.csv** - Defines technical specification sections and prompts
+### CSV Templates (`templates/` folder)
+1. **templates/prd_instructions.csv** - Defines PRD sections and generation prompts
+2. **templates/spec_instructions.csv** - Defines technical specification sections and prompts
+
+### Markdown Templates (`kaia/prompts/` folder)
+3. **kaia/prompts/action_plan_template.md** - Defines the action plan generation prompt with placeholder replacement logic (`{{SPEC_MD}}` and `{{PRD_MD}}`)
 
 You can customize these templates to match your specific needs.
 
@@ -151,8 +174,8 @@ Install with: `pip install -r requirements.txt`
 ### Individual Steps
 ```bash
 ./kaia prd my_product_idea.txt
-./kaia spec output/prd_YYYYMMDD_HHMMSS.md
-./kaia action output/technical_specification_YYYYMMDD_HHMMSS.md
+./kaia spec output/forager_prd_1.md
+./kaia action output/forager_spec_1.md
 ```
 
 ### Skip Steps (Pipeline Only)
@@ -211,11 +234,13 @@ The technical specification tool generates a detailed technical document based o
 - Open Questions & Assumptions
 
 ### Action Plan Output
-The action plan tool generates a practical implementation guide with:
-- Initial Setup Checklist (API keys, environment setup, etc.)
-- MVP vs Non-MVP Breakdown
-- TaskMaster Prompt for development task breakdown
-- Next Steps for the development team
+The action plan tool generates an MVP-focused implementation guide with:
+- **Guiding Principles** (max 6 bullets; inferred core tech choices)
+- **Milestones** (each with Goal, Key Tasks, Exit Tests)
+- **Manual Setup ✓ Checklist** (API keys, OAuth creds, env vars, and other one-time setup steps)
+- **Next Steps** (blank section for team planning)
+
+The action plan uses a generic prompt template (`kaia/prompts/action_plan_template.md`) with placeholder replacement logic for technical spec and PRD content.
 
 ### Generation Summary
 The master script creates a JSON summary file containing:

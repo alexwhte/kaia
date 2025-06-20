@@ -10,7 +10,7 @@ load_dotenv()
 # Parse command line arguments
 parser = argparse.ArgumentParser(description='Generate PRD from input file')
 parser.add_argument('input_file', help='Path to the input text file containing the product idea')
-parser.add_argument('--template', default='prd_instructions.csv', help='Path to the PRD template CSV file (default: prd_instructions.csv)')
+parser.add_argument('--template', default='templates/prd_instructions.csv', help='Path to the PRD template CSV file (default: templates/prd_instructions.csv)')
 parser.add_argument('--output', default='output/prd.md', help='Path to the output markdown file (default: output/prd.md)')
 args = parser.parse_args()
 
