@@ -1,0 +1,57 @@
+#!/bin/bash
+
+# PRD Auto unified CLI
+# Usage: kaia [prd|techspec|actionplan|milestones|gtm|all] [args...]
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/scripts" && pwd)"
+
+# If first argument is a subcommand, use it; otherwise default to 'all'
+case "$1" in
+  prd|techspec|actionplan|milestones|gtm|all)
+    subcommand="$1"
+    shift
+    ;;
+  *)
+    # No subcommand provided, default to 'all' and keep all arguments
+    subcommand="all"
+    ;;
+esac
+
+case "$subcommand" in
+  prd)
+    python3 "$SCRIPT_DIR/prd_auto.py" "$@"
+    ;;
+  techspec)
+    python3 "$SCRIPT_DIR/spec_auto.py" "$@"
+    ;;
+  actionplan)
+    python3 "$SCRIPT_DIR/action_plan_auto.py" "$@"
+    ;;
+  milestones)
+    python3 "$SCRIPT_DIR/milestones_auto.py" "$@"
+    ;;
+  gtm)
+    python3 "$SCRIPT_DIR/gtm_auto.py" "$@"
+    ;;
+  all)
+    python3 "$SCRIPT_DIR/master_auto.py" "$@"
+    ;;
+  *)
+    echo "Usage: kaia [prd|techspec|actionplan|milestones|gtm|all] [args...]"
+    echo "  prd        Generate PRD from product idea"
+    echo "  techspec   Generate Technical Spec from PRD markdown file"
+    echo "  actionplan Generate Action Plan from Technical Spec markdown file"
+    echo "  milestones Generate Milestone Specifications from Technical Spec and Action Plan"
+    echo "  gtm        Generate Go-To-Market Plan from PRD markdown file"
+    echo "  all        Run the full pipeline (default)"
+    echo ""
+    echo "Examples:"
+    echo "  kaia prd 'Build a social media app for photographers'"
+    echo "  kaia techspec output/prd_v1.md"
+    echo "  kaia actionplan output/tech_spec_v1.md --prd-file output/prd_v1.md"
+    echo "  kaia milestones output/tech_spec_v1.md --action-plan-file output/action_plan_v1.md"
+    echo "  kaia gtm output/prd_v1.md"
+    echo "  kaia all 'Build a social media app for photographers' --version 1"
+    exit 1
+    ;;
+esac 

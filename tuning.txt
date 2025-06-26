@@ -1,0 +1,127 @@
+***1-INSTRUCTIONS: 
+High-Level Technical Architecture,Senior Engineer / Tech Lead,"You are a Senior Engineer / Tech Lead writing a **High-Level Technical Architecture** section.
+
+Provide a thoughtful technical overview in this exact order:
+
+**How the Product Works:**
+- Explain the main user journey and data flow in 2-3 sentences
+- Focus on how users interact with the system and how data moves through it
+- Include any external integrations or APIs required
+
+**Architecture Diagram:**
+Create a Mermaid diagram showing:
+- User interactions and data flow
+- Key system components and their relationships
+- External APIs or services
+- Data storage and processing flow
+
+**Major System Components:**
+- List 4-6 key technical components that align with the diagram
+- For each component, briefly explain its role and why it's needed
+- Consider data flow, user interactions, and core functionality
+
+**Major Technical Open Questions:**
+- Identify 3-4 critical technical unknowns that need investigation
+- Flag potential feasibility issues or technical risks
+- Questions about scalability, performance, or integration challenges
+- Data sources, API limitations, or technical dependencies
+
+**CTO Validation Perspective:**
+- Technical feasibility assessment
+- Potential blockers or showstoppers
+- Recommended technical approach (MVP vs. full solution)
+- Key technical decisions that need to be made
+
+Keep it under 250 words total. Be specific enough to identify real technical challenges, but generic enough to apply to any product idea. Focus on the technical architecture, not implementation details.","Technical overview with product flow, Mermaid diagram, components, open questions, and CTO validation.","- [ ] ≤250 words
+ - [ ] Starts with how product works
+ - [ ] Includes Mermaid diagram
+ - [ ] Lists major system components
+ - [ ] Identifies technical open questions
+ - [ ] Includes CTO validation perspective
+ - [ ] Generic enough for any product
+ - [ ] Focuses on architecture, not implementation"
+
+***1-OUTPUT:
+## High-Level Technical Architecture
+
+**How the Product Works:**
+Users share Instagram reels to Forager, which utilizes an API to extract the video transcript. Natural Language Processing (NLP) technology parses this transcript, identifying and storing eateries and dishes. Users can then export this data to Google Maps or view it directly in the app.
+
+```mermaid
+graph LR
+    A[Instagram] -- Share reel --> B[Forager]
+    B -->|NLP| C[Data Storage]
+    C --> D[Google Maps]
+    C --> E[Forager App]
+```
+
+**Major System Components:**
+1. **Instagram API**: Extracts video transcripts.
+2. **NLP Parser**: Identifies eateries and dishes from transcripts.
+3. **Data Storage**: Stores parsed data for user access.
+4. **Google Maps API**: Enables data export for user convenience.
+5. **Forager App**: Provides user interface for data interaction.
+
+**Major Technical Open Questions:**
+1. What are the limitations of the Instagram API in terms of data access and rate limits?
+2. How accurate is the NLP technology in extracting relevant information from Instagram reels?
+3. Can Google Maps handle data exports of this nature?
+4. How scalable is this architecture with increasing user data?
+
+**CTO Validation Perspective:**
+The technical feasibility seems solid, with potential blockers lying in the accuracy of the NLP technology and limitations of Instagram's API. The MVP should focus on parsing and storing data from Instagram reels. Decisions need to be made regarding the choice of NLP technology and data storage solution.
+
+***2-INSTRUCTIONS
+ LLM Processing Logic,Data Engineer,"You are a Data Engineer writing the LLM Processing Logic section.
+
+Focus on using Large Language Models (LLMs) for text processing rather than traditional NLP pipelines:
+
+1. **LLM Approach** - How to use LLMs (default: GPT-4) to extract structured data from text
+2. **Prompt Engineering** - How to craft prompts to extract specific information (e.g., restaurant names, locations, dishes)
+3. **Data Validation** - How to validate and clean extracted data
+4. **Error Handling** - How to handle cases where extraction fails or is unclear
+5. **Alternative LLMs** - Brief mention of other LLM options (Claude, Gemini, etc.) for future flexibility
+
+Keep it simple and practical. The goal is to use modern LLMs to parse text, not build complex NLP models.
+
+Format as a clear explanation with examples of prompts and expected outputs.","Clear explanation of using LLMs for text parsing with prompt examples.","- [ ] Uses LLM approach (default GPT-4)
+ - [ ] Includes prompt examples
+ - [ ] Covers data validation
+ - [ ] Addresses error handling
+ - [ ] Practical and simple
+ - [ ] Mentions alternative LLMs"
+
+ ***2-OUTPUT
+ ## LLM Processing Logic
+
+# LLM Processing Logic
+
+## 1. LLM Approach
+
+Large Language Models (LLMs) like GPT-4 can be used to extract structured data from unstructured text. This method can be applied to the Instagram reel transcripts that our application receives. The LLM can generate structured outputs based on the prompts provided to it.
+
+For instance, if we provide a transcript from an Instagram reel and prompt the model with "List all the restaurant names mentioned in the text", the model will provide a list of all the restaurant names. This makes it a powerful tool for parsing and extracting data.
+
+## 2. Prompt Engineering
+
+The success of an LLM in providing the right data heavily depends on the prompts provided to it. Here are some examples of prompts that can be used to extract specific information:
+
+- To extract restaurant names: "Extract all the restaurant names mentioned in the text."
+- To extract locations: "Identify all the locations or cities mentioned in the text."
+- To extract dishes: "List all the dishes mentioned in the text."
+
+The LLM will then return the structured data that matches these prompts.
+
+## 3. Data Validation
+
+Once the data is extracted, it's crucial to validate it. Simple checks can be applied, such as verifying if the extracted restaurant names or dish names exist or are valid. We can make use of APIs like Google Places or food databases to ensure the authenticity of the extracted data.
+
+## 4. Error Handling
+
+In cases where the extraction fails or the LLM returns unclear results, we need to have a robust error handling mechanism in place. This could mean re-prompting the LLM, applying different prompt strategies, or in worst cases, asking for human intervention to parse the unclear sections. 
+
+## 5. Alternative LLMs
+
+While GPT-4 is our default choice, there are other LLMs available that could be explored for future flexibility. These include models like OpenAI's GPT-3, Google’s BERT, Microsoft’s Turing NLG, or Facebook's Bart. Each of these models has its strengths and weaknesses, and the choice would depend on the specific requirements and constraints of our application.
+
+By using this approach, we can leverage the power of LLMs to parse and extract data from Instagram reel transcripts in a simple and practical way, without the need to build complex NLP models. This will enable us to provide our users with the best local food spots based on Instagram reels, thereby increasing user engagement and making their food exploration process seamless while traveling.

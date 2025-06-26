@@ -1,5 +1,5 @@
 Section,Role Emulated,Prompt Instruction,Output Format,Acceptance Criteria
-Purpose & Scope,Technical Product Manager,"You are a Technical Product Manager writing the **Purpose & Scope** section of a Technical Specification.
+Purpose & Scope,Technical Product Manager,"You are a Technical Product Manager writing the Purpose & Scope section of a Technical Specification.
  
 
  Write a clear, concise scope definition that's easy to read and inspiring. Use bullet points for better readability.
@@ -15,7 +15,7 @@ Purpose & Scope,Technical Product Manager,"You are a Technical Product Manager w
  - [ ] Confident but approachable tone
  - [ ] No overly formal language
  - [ ] Clear in/out scope definition"
-High-Level Architecture Diagram,Senior Software Architect,"You are a Senior Software Architect creating a **High-Level Architecture Diagram** section.
+High-Level Architecture Diagram,Senior Software Architect,"You are a Senior Software Architect creating a High-Level Architecture Diagram section.
  
 
  Create a textual architecture diagram that shows:
@@ -28,7 +28,7 @@ High-Level Architecture Diagram,Senior Software Architect,"You are a Senior Soft
  - [ ] Includes data flow
  - [ ] Lists key technologies
  - [ ] Clear component boundaries"
-Data Flow & Sequence Diagrams,Systems Engineer,"You are a Systems Engineer creating **Data Flow & Sequence Diagrams**.
+Data Flow & Sequence Diagrams,Systems Engineer,"You are a Systems Engineer creating Data Flow & Sequence Diagrams.
  
 
  Create 2-3 key sequence diagrams showing:
@@ -40,7 +40,7 @@ Data Flow & Sequence Diagrams,Systems Engineer,"You are a Systems Engineer creat
  - [ ] Covers main user flows
  - [ ] Shows data processing steps
  - [ ] Includes API interactions"
-Key Components,Lead Software Engineer,"You are a Lead Software Engineer defining **Key Components**.
+Key Components,Lead Software Engineer,"You are a Lead Software Engineer defining Key Components.
  
 
  Create a detailed table with columns: Component | Responsibility | Technology/Libraries | Owner
@@ -54,7 +54,7 @@ Key Components,Lead Software Engineer,"You are a Lead Software Engineer defining
  - [ ] Covers all major system parts
  - [ ] Clear responsibilities
  - [ ] Specific technologies listed"
-External Integrations & APIs,API Integration Specialist,"You are an API Integration Specialist documenting **External Integrations & APIs**.
+External Integrations & APIs,API Integration Specialist,"You are an API Integration Specialist documenting External Integrations & APIs.
  
 
  Create a comprehensive table with columns: Service | Endpoint | Rate Limits | Auth Method | Expected Payload
@@ -69,7 +69,7 @@ External Integrations & APIs,API Integration Specialist,"You are an API Integrat
  - [ ] Includes rate limits
  - [ ] Specifies auth methods
  - [ ] Describes payloads"
-Data Models & Schemas,Data Architect,"You are a Data Architect defining **Data Models & Schemas**.
+Data Models & Schemas,Data Architect,"You are a Data Architect defining Data Models & Schemas.
  
 
  Create JSON schema examples for 4-5 core data models including:
@@ -83,24 +83,43 @@ Data Models & Schemas,Data Architect,"You are a Data Architect defining **Data M
  - [ ] Includes field types
  - [ ] Shows constraints
  - [ ] Clear relationships"
-Parsing & NLP Logic,Data Engineer,"You are a Data Engineer writing the **Parsing & NLP Logic** section.
+Data Processing & LLM Logic,Data Engineer,"You are a Data Engineer writing the Data Processing & LLM Logic section.
 
-Focus on practical text parsing using OpenAI's GPT models rather than complex NLP pipelines:
+Analyze the product requirements and define the appropriate data processing pipeline:
 
-1. **Text Processing Approach** - How to use ChatGPT/OpenAI to extract structured data from text
-2. **Prompt Engineering** - How to craft prompts to extract specific information (e.g., restaurant names, locations)
-3. **Data Validation** - How to validate and clean extracted data
-4. **Error Handling** - How to handle cases where extraction fails or is unclear
+**Input Data Analysis:**
+- What types of input data does this product need to process? (text, images, audio, video, structured data, etc.)
+- Are there external APIs or data sources that need to be integrated?
+- What are the data access limitations or constraints?
 
-Keep it simple and practical. The goal is to use AI to parse text, not build complex NLP models.
+**Data Processing Pipeline:**
+- If the system processes raw media (audio, video, images), define how it gets converted to structured text:
+  - Speech-to-text engines (Whisper, Google Speech-to-Text) for audio content
+  - OCR tools (Tesseract, cloud OCR) for text extraction from images/video frames
+  - Video frame extraction and processing for visual content
+- If the system processes text directly, define the text preprocessing steps
+- If the system integrates with external APIs, define how data is extracted and validated
+- Consider fallback approaches when APIs don't provide required data directly
 
-Format as a clear explanation with examples of prompts and expected outputs.","Clear explanation of using AI for text parsing with prompt examples.","- [ ] Uses OpenAI/GPT approach
- - [ ] Includes prompt examples
- - [ ] Covers data validation
- - [ ] Addresses error handling
- - [ ] Practical and simple
- - [ ] No complex NLP models"
-Edge-Case & Error Handling,DevOps Engineer,"You are a DevOps Engineer defining **Edge-Case & Error Handling**.
+**LLM Processing:**
+- How to use LLMs (default: GPT-4) to extract structured data from the processed content
+- Prompt engineering for extracting specific information relevant to the product
+- Data validation and cleaning of extracted information
+- Error handling for cases where extraction fails or is unclear
+- Alternative LLM options (Claude, Gemini, etc.) for future flexibility
+
+**Data Unification (if multiple sources):**
+- How to combine and validate data from multiple sources
+- Conflict resolution when different sources provide conflicting information
+- Quality scoring and confidence levels for extracted data
+
+Keep it practical and tailored to the specific product requirements. Only include multimodal processing if the product actually needs it.","Intelligent data processing pipeline that adapts to the specific product requirements.","- [ ] Analyzes input data requirements
+ - [ ] Defines appropriate processing pipeline
+ - [ ] Includes multimodal processing only when needed
+ - [ ] Covers LLM processing approach
+ - [ ] Addresses data unification if applicable
+ - [ ] Practical and tailored to product"
+Edge-Case & Error Handling,DevOps Engineer,"You are a DevOps Engineer defining Edge-Case & Error Handling.
  
 
  Create a comprehensive table with columns: Scenario | Expected Response | Retry Strategy | Alert/Logging
@@ -115,7 +134,7 @@ Edge-Case & Error Handling,DevOps Engineer,"You are a DevOps Engineer defining *
  - [ ] Specific responses defined
  - [ ] Retry strategies included
  - [ ] Alert mechanisms specified"
-Non-Functional Requirements,Performance Engineer,"You are a Performance Engineer defining **Non-Functional Requirements**.
+Non-Functional Requirements,Performance Engineer,"You are a Performance Engineer defining Non-Functional Requirements.
  
 
  Specify quantitative requirements for:
@@ -129,7 +148,7 @@ Non-Functional Requirements,Performance Engineer,"You are a Performance Engineer
  - [ ] Scalability metrics defined
  - [ ] Availability SLAs set
  - [ ] Security requirements listed"
-Security & Privacy,Backend Engineer,"You are a Backend Engineer writing the **Security & Privacy** section.
+Security & Privacy,Backend Engineer,"You are a Backend Engineer writing the Security & Privacy section.
 
 Focus on practical, essential security measures that are actually needed for this project:
 
@@ -146,36 +165,17 @@ Format as a clear, structured list with brief explanations.","Structured list of
  - [ ] Mentions user privacy
  - [ ] Practical and concise
  - [ ] No over-engineering"
-Observability & Monitoring,Site Reliability Engineer,"You are a Site Reliability Engineer defining **Observability & Monitoring**.
- 
+Quality Assurance & Monitoring,QA Lead,"You are a QA Lead creating a Quality Assurance & Monitoring section.
 
- Specify monitoring requirements:
- 1. Key metrics and KPIs
- 2. Logging strategy
- 3. Alert thresholds
- 4. Dashboard requirements
- 5. Incident response procedures
+Create a concise table covering:
+1. Key testing types (Unit, Integration, Performance)
+2. Basic monitoring metrics and alerts
+3. Quality gates and validation criteria
 
- Include specific tools and thresholds.","Detailed monitoring specification.","- [ ] Key metrics defined
- - [ ] Alert thresholds set
- - [ ] Dashboard requirements
- - [ ] Response procedures"
-Testing & Validation Plan,QA Lead,"You are a QA Lead creating a **Testing & Validation Plan**.
- 
-
- Create a comprehensive testing strategy table with columns: Test Type | Tool | Owner | Pass Criteria
- Include:
- - Unit testing
- - Integration testing
- - Performance testing
- - Security testing
- - User acceptance testing
-
- Define specific criteria for each test type.","Markdown table with testing strategy.","- [ ] Covers all test types
- - [ ] Specific tools listed
- - [ ] Clear pass criteria
- - [ ] Owners assigned"
-Implementation Roadmap,Technical Product Manager,"You are a Technical Product Manager creating an **Implementation Roadmap**.
+Keep it focused on MVP needs.","Markdown table with QA and monitoring essentials.","- [ ] Covers essential testing
+- [ ] Basic monitoring defined
+- [ ] Quality gates specified"
+Implementation Roadmap,Technical Product Manager,"You are a Technical Product Manager creating an Implementation Roadmap.
  
 
  Create a table mapping PRD User Requirements to technical implementation details:
@@ -190,7 +190,7 @@ Implementation Roadmap,Technical Product Manager,"You are a Technical Product Ma
  - [ ] Clear technical implementation
  - [ ] Identifies subtasks
  - [ ] MVP priority marked"
-Open Questions & Assumptions,Technical Product Manager,"You are a Technical Product Manager documenting **Open Questions & Assumptions**.
+Open Questions & Assumptions,Technical Product Manager,"You are a Technical Product Manager documenting Open Questions & Assumptions.
  
 
  Create a structured list of:
@@ -203,4 +203,92 @@ Open Questions & Assumptions,Technical Product Manager,"You are a Technical Prod
  - [ ] Assumptions listed
  - [ ] Dependencies tracked
  - [ ] Risks identified
- - [ ] No specific dates" 
+ - [ ] No specific dates"
+CTO Technical Validation,Senior CTO,"You are a Senior CTO conducting a critical technical review of the proposed architecture and implementation plan.
+
+Review the entire technical specification AND the PRD's technical architecture section from a CTO perspective and provide:
+
+**Critical Technical Issues:**
+- Identify any technically infeasible or unrealistic components
+- Flag API limitations, data access restrictions, or integration challenges
+- Point out scalability or performance concerns
+- Highlight security vulnerabilities or compliance issues
+- Review PRD technical architecture for feasibility
+- Check if proposed data sources actually provide the required data
+
+**Data Processing Pipeline Validation:**
+- Does the system assume APIs provide data they don't actually provide?
+- If the product processes media content (audio, video, images), are the necessary preprocessing steps defined?
+- Is the complete pipeline from raw input to structured output defined for the specific data types needed?
+- Are fallback approaches included when APIs have limitations?
+- Does the data processing approach match the actual product requirements?
+
+**Major Component Limitations:**
+- What APIs or services are assumed to provide data they don't actually provide?
+- Are there data access restrictions or rate limits that would break the system?
+- Do the proposed integrations actually exist or work as described?
+- Are there technical dependencies that are unrealistic or unavailable?
+
+**Architecture Gaps:**
+- Missing components or dependencies
+- Unrealistic data flows or assumptions
+- Technology stack mismatches or conflicts
+- Discrepancies between PRD and technical spec
+
+**Critical Design Questions:**
+- Fundamental questions that must be answered before proceeding
+- Alternative approaches that should be considered
+- Risk factors that could derail the project
+- Technical assumptions that need validation
+
+**Recommended Pivots:**
+- Specific changes needed to make the architecture realistic
+- Simplified approaches for MVP
+- Alternative technical strategies
+- PRD technical architecture revisions needed
+
+Be direct and critical - don't sugarcoat issues. Focus on what would prevent this from working in reality.","Structured review with critical issues, data processing validation, gaps, questions, and recommended pivots.","- [ ] Identifies critical technical issues
+ - [ ] Validates data processing pipeline
+ - [ ] Highlights major component limitations
+ - [ ] Lists critical design questions
+ - [ ] Provides specific recommended pivots
+ - [ ] Reviews PRD technical architecture
+ - [ ] Direct and critical tone"
+Technical Validation Findings & Decisions,Technical Product Manager,"You are a Technical Product Manager documenting technical validation findings and decisions from the CTO review.
+
+Create a comprehensive summary of technical validation feedback including:
+
+**Technical Assumptions Identified:**
+- Key assumptions about API capabilities, data flows, or system architecture
+- Technical dependencies and prerequisites
+- Assumptions that need validation before proceeding
+
+**Technical Issues & Concerns:**
+- Feasibility issues identified by CTO review
+- Architecture gaps or missing components
+- Performance, scalability, or security concerns
+- Integration challenges or API limitations
+
+**Technical Decisions Made:**
+- How CTO feedback was addressed
+- Architecture modifications or pivots
+- Technology stack adjustments
+- Scope changes based on technical constraints
+
+**Remaining Technical Questions:**
+- Technical questions that still need answers
+- Areas requiring further research or prototyping
+- Technical decisions that need to be made
+- Validation experiments or proof-of-concepts needed
+
+**Next Steps for Technical Validation:**
+- Specific technical actions needed
+- Timeline for resolving technical issues
+- Success criteria for technical validation
+- Prototype or MVP requirements
+
+Document this as a living document that will be updated as technical validation progresses.","Structured documentation of technical validation findings, decisions, and next steps.","- [ ] Documents technical assumptions
+ - [ ] Lists technical issues and concerns
+ - [ ] Records technical decisions made
+ - [ ] Identifies remaining technical questions
+ - [ ] Defines technical next steps" 

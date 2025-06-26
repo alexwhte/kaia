@@ -1,21 +1,50 @@
 Section,Role Emulated,Prompt Instruction,Output Format,Acceptance Criteria
-Product Overview,Product Manager,"You are a Product Manager writing a **clear and practical Product Overview** for a PRD.
+Product Overview,Product Manager,"You are a Product Manager writing a concise Product Overview for a PRD.
  
-Start with a **one-sentence summary** that simply describes what the product is and does.
+Start with a **1-sentence high-level summary** of what the product is, written for the team building/investing in the product, not addressing 'you' as the reader.
 
-Then provide **exactly three bold‑labeled sections**:
-**The Problem:** Describe the specific pain point in clear, practical terms
-**The Solution:** Explain how the product solves this problem in concrete terms
-**The Goal:** State the measurable outcome or impact the product aims to achieve
+Then write exactly three bold‑labeled sections in this exact format:
 
-Keep it concise and business-focused. Avoid overly inspirational or salesy language. Focus on clarity and practicality.
+**Problem:** [One clear sentence describing the specific pain point]
 
-Total length should be under 150 words.","One-sentence summary followed by three bold‑labeled sections (Problem, Solution, Goal) — no bullets or paragraphs.","- [ ] Starts with clear one-sentence summary
- - [ ] ≤150 words total
+**Solution:** [One clear sentence explaining how the product solves this problem]
+
+**Goal:** [One clear sentence stating the measurable outcome or impact]
+
+Keep each section to one sentence maximum. Use direct, conversational language - write like you're explaining to a colleague, not writing a formal document. Avoid words like 'subsequently', 'thereby', 'furthermore', etc.
+
+Total length should be under 150 words.","1-sentence intro + three bold‑labeled sections (Problem, Solution, Goal) - direct, conversational tone.","- [ ] Starts with 1-sentence high-level summary
  - [ ] Exactly 3 sections labeled Problem/Solution/Goal in bold
- - [ ] Practical, business-focused tone
- - [ ] No overly inspirational language
- - [ ] No extra headings or paragraphs"
+ - [ ] Each section is one sentence maximum
+ - [ ] ≤150 words total
+ - [ ] Direct, conversational tone
+ - [ ] No formal language like 'subsequently', 'thereby'"
+Market Context,Product Marketing Manager,"You are a Product Marketing Manager writing the Market Context section.
+
+Write a clear, readable market analysis that indirectly answers 'Who wants this?' and 'What evidence shows people want this?' through natural market description.
+
+Structure as 2 concise sections with bullet points for readability:
+
+**Market Opportunity:**
+- Who has this problem and why it matters
+- Market size and demographics
+- Key trends driving demand
+
+**Market Validation:**
+- Specific evidence that people are actively seeking solutions
+- User behaviors and data points
+- Examples of similar successful products
+- Industry statistics that support demand
+
+Use bullet points throughout for easy reading. Include specific data points and examples, but focus on telling a clear market story rather than just listing statistics.
+
+Keep it under 200 words total.","Clear market analysis with bullet points that indirectly answers the key questions through natural market description.","- [ ] ≤200 words
+ - [ ] Uses bullet points for readability
+ - [ ] Describes market opportunity clearly
+ - [ ] Provides specific evidence and data
+ - [ ] Indirectly answers 'Who wants this?' and 'What evidence shows demand?'
+ - [ ] Focuses on market story over statistics
+ - [ ] Only 2 sections: Opportunity and Validation"
 Users,Lead Product Manager / User Researcher,"You are a Lead Product Manager compiling the **Users** section.
  
 
@@ -30,17 +59,6 @@ Users,Lead Product Manager / User Researcher,"You are a Lead Product Manager com
  - [ ] 4‑row table without ``` delimiters
  - [ ] Each cell concise
  - [ ] Uses column headers exactly as specified"
-Market Context,Product Marketing Manager,"You are a Product Marketing Manager writing the **Market Context** section.
- 
-
- Using the Product Overview above for context, write **2 concise paragraphs (≤200 words total)** that:
- 1. Quantify the market pain with at least one recent statistic.
- 2. Highlight macro trends that create urgency (social, tech, behavioral).
- End with a single‑sentence opportunity statement.
- Tone: data‑driven, succinct, persuasive.",Two short paragraphs + one final single‑sentence opportunity statement.,"- [ ] ≤200 words
- - [ ] Includes ≥1 statistic with source
- - [ ] Ends with opportunity statement
- - [ ] No code blocks"
 User Requirements,Lead Product Manager,"You are a Product Manager drafting the **User Requirements** section.
  
 
@@ -55,50 +73,85 @@ Metrics & KPIs,Chief Product Officer,"You are Chief Product Officer writing the 
  - [ ] Covers at least 4 funnel stages
  - [ ] Targets quantitative
  - [ ] No code blocks"
-High-Level Technical Architecture,Senior Engineer / Tech Lead,"You are the Senior Engineer / Tech Lead writing a **High-Level Technical Architecture** section.
- 
+High-Level Technical Architecture,Senior Engineer / Tech Lead,"You are a Senior Engineer / Tech Lead writing a **High-Level Technical Architecture** section.
 
- Provide a concise technical overview including:
- 1. **System Overview** (2-3 sentences on the overall architecture)
- 2. **Key Components** (bullet list of 4-5 major components)
- 3. **Architecture Diagram** (simple ASCII/text diagram showing component relationships)
- 4. **Technical Stack** (brief list of main technologies)
- 5. **Integration Points** (key external APIs/services)
+Provide a thoughtful technical overview in this exact order:
 
- Keep total length under 400 words. Focus on high-level understanding, not implementation details.","Concise technical overview with diagram and component list.","- [ ] ≤400 words
- - [ ] Includes system overview
- - [ ] Shows architecture diagram
- - [ ] Lists key technologies
- - [ ] No implementation details"
-Go-To-Market,Lead Product Manager and Product Marketing Manager,"You are a Lead Product Manager and Product Marketing Manager drafting a **Go-To-Market Plan**.
- 
+**How the Product Works:**
+- Explain the main user journey and data flow in 2-3 sentences
+- Focus on how users interact with the system and how data moves through it
+- Include any external integrations or APIs required
 
-  Include:
-  1. 2–3 target audience segments
-  2. Core positioning statement
-  3. 3 messaging pillars
-  4. Launch tactics table (channel, tactic, KPI, owner)
-  5. 30-60-90 day success metrics",Bulleted GTM plan by theme,"- [ ] Includes 2–3 well-labeled segments
-  - [ ] Messaging and positioning are concise
-  - [ ] GTM tactics are mapped to channels + KPIs
-  - [ ] Success metrics span 30–90 days
-  - [ ] Structured in Markdown or table format"
-Appendix - SWOT Analysis,Product Marketing Manager,"You are a PMM and Competitive Intelligence Analyst.
-  
-  Create a **SWOT matrix** with a short summary. Present in Markdown format.
-  
-  Include:
- 1. 'Summary Insights': [SUMMARY_INSIGHTS] 
- 2. SWOT 
-  - Strengths
-  - Weaknesses
-  - Opportunities
-  - Threats",Markdown SWOT tables and summary,"- [ ] SWOT is structured and thorough 
- - [ ] Summary is ≤300 words . Includes a clear differentiation summary
-  - [ ] SWOT entries are product-relevant
-  - [ ] Language is concise and specific
-  - [ ] Avoids fluff or repeating same points"
+**Architecture Diagram:**
+Create a Mermaid diagram using proper code block formatting with triple backticks. Show:
+- User interactions and data flow
+- Key system components and their relationships
+- External APIs or services
+- Data storage and processing flow
+
+**Major System Components:**
+- List 4-6 key technical components that align with the diagram
+- For each component, briefly explain its role and why it's needed
+- Consider data flow, user interactions, and core functionality
+
+**Data Processing Pipeline:**
+- If the system processes media content (audio, video, images), define how raw media will be ingested and converted into structured text
+- If the system processes text directly, define the text preprocessing steps
+- If the system integrates with external APIs, define how data is extracted and validated
+- Identify preprocessing components required before LLMs can operate on the data (if applicable)
+- Consider fallback approaches when APIs don't provide required data directly
+
+**Major Technical Open Questions:**
+- For any external API mentioned, verify whether the required data is actually available and accessible
+- Identify any constraints or limitations in data access
+- Flag potential feasibility issues or technical risks
+- Questions about scalability, performance, or integration challenges
+- Assume external APIs may not provide required data directly - investigate fallback approaches (e.g., scraping, OCR, speech-to-text) when API limitations exist
+
+**CTO Validation Perspective:**
+- Technical feasibility assessment
+- Potential blockers or showstoppers
+- Recommended technical approach (MVP vs. full solution)
+- Key technical decisions that need to be made
+
+Keep it under 300 words total. Be specific enough to identify real technical challenges, but generic enough to apply to any product idea. Focus on the technical architecture, not implementation details.","Technical overview with product flow, Mermaid diagram, components, data processing pipeline, open questions, and CTO validation.","- [ ] ≤300 words
+ - [ ] Starts with how product works
+ - [ ] Includes Mermaid diagram
+ - [ ] Lists major system components
+ - [ ] Defines data processing pipeline
+ - [ ] Validates API capabilities
+ - [ ] Identifies technical open questions
+ - [ ] Includes CTO validation perspective
+ - [ ] Generic enough for any product
+ - [ ] Focuses on architecture, not implementation"
 Appendix - Competitor Analysis,Product Marketing Manager,"Generate the **Appendix – Competitor Analysis** section for a PRD about [PRODUCT_NAME].
  
 
  Competitor Matrix' – markdown table with: Platform, Core Focus, AI Capabilities, Personalization, Coverage Scope, Pricing Model, Strengths, Limitations, Alignment with Forager's Vision",Markedown table with competitors,- [ ] Matrix has ≥5 competitors
+Appendix - Validation Findings & Decisions,Product Manager,"You are a Product Manager documenting validation findings and decisions from executive reviews.
+
+Create a focused summary of validation feedback including:
+
+**Major Assumptions Identified:**
+- Key assumptions about user behavior, market conditions, or technical feasibility
+- Assumptions that need validation before proceeding
+- Critical dependencies and prerequisites
+
+**Issues & Concerns Raised:**
+- Technical feasibility issues from CTO review
+- Product strategy concerns from CPO review
+- Market or competitive issues identified
+- Risk factors that could derail the project
+
+**Technical Validation Check:**
+- Are there any unrealistic assumptions about external data access or API capabilities?
+- Does the technical architecture assume APIs provide data that may not be available?
+- Are there missing fallback approaches for when APIs have limitations?
+- Suggest at least one mitigation for any identified issues
+
+Keep it concise and actionable. Focus on the most critical findings that need to be addressed.","Focused documentation of major assumptions, key issues/concerns, and technical validation check.","- [ ] Documents major assumptions
+ - [ ] Lists key issues and concerns
+ - [ ] Validates technical assumptions
+ - [ ] Suggests mitigations
+ - [ ] Concise and actionable
+ - [ ] Focuses on critical findings"

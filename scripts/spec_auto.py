@@ -13,7 +13,8 @@ load_dotenv()
 parser = argparse.ArgumentParser(description='Generate Technical Specification from PRD file')
 parser.add_argument('prd_file', help='Path to the PRD markdown file (required)')
 parser.add_argument('--template', default='templates/spec_instructions.csv', help='Path to the technical spec template CSV file (default: templates/spec_instructions.csv)')
-parser.add_argument('--output', default='output/technical_specification.md', help='Path to the output markdown file (default: output/technical_specification.md)')
+parser.add_argument('--output', default='output/tech_spec.md', help='Path to the output markdown file (default: output/tech_spec.md)')
+parser.add_argument('--validation-file', default='output/validation_tracking.md', help='Path to the validation tracking file to update (default: output/validation_tracking.md)')
 parser.add_argument('--product-idea', help='Path to original product idea file for additional context (optional)')
 parser.add_argument('--generate-action-plan', action='store_true', help='Automatically generate action plan after technical specification')
 args = parser.parse_args()
@@ -75,6 +76,15 @@ context_dependencies = {
     "Open Questions & Assumptions": []  # Can reference any previous sections
 }
 
+def add_validation_finding(validation_file, section, finding):
+    """Add a validation finding to the tracking file."""
+    if os.path.exists(validation_file):
+        with open(validation_file, "a") as f:
+            f.write(f"### {section}\n")
+            f.write(f"{finding}\n\n")
+    else:
+        print(f"⚠️  Validation file not found: {validation_file}")
+
 # Iterate through each technical spec section
 for _, row in df.iterrows():
     section = row["Section"]
@@ -122,6 +132,10 @@ Acceptance Criteria:
     # Store output
     section_outputs[section] = output
 
+    # Add validation finding if this is a validation section
+    if "Validation" in section or "CTO" in section:
+        add_validation_finding(args.validation_file, section, output)
+
     print(f"\n--- {section.upper()} COMPLETE ---\n")
     print(output)
     print("\n" + "="*60 + "\n")
@@ -135,6 +149,9 @@ with open(args.output, "w") as out_file:
     out_file.write("This document provides detailed technical specifications based on the Product Requirements Document (PRD).\n\n")
     
     for section, content in section_outputs.items():
+        # Skip validation sections in the spec output - they go to validation file only
+        if "Validation" in section or "CTO" in section:
+            continue
         out_file.write(f"## {section}\n\n{content}\n\n")
 
 # Generate action plan if requested
@@ -160,4 +177,8 @@ if args.generate_action_plan:
             print(f"❌ Error generating action plan: {result.stderr}")
             
     except Exception as e:
-        print(f"❌ Error generating action plan: {e}") 
+        print(f"❌ Error generating action plan: {e}")
+
+print(f"✅ Technical specification generated: {args.output}")
+if os.path.exists(args.validation_file):
+    print(f"✅ Validation findings added to: {args.validation_file}") 

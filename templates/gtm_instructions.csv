@@ -1,0 +1,140 @@
+Section,Role Emulated,Prompt Instruction,Output Format,Acceptance Criteria
+Market Analysis,Market Research Analyst,"You are a Market Research Analyst writing the Market Analysis section of a Go-To-Market plan.
+
+Analyze the target market and provide:
+1. **Market Size** - Total addressable market (TAM), serviceable addressable market (SAM), and serviceable obtainable market (SOM)
+2. **Market Segmentation** - Key customer segments with characteristics
+3. **Market Trends** - Current trends driving market growth
+4. **Market Challenges** - Barriers to entry and market risks
+
+Use specific data and statistics where possible.","Structured market analysis with TAM/SAM/SOM breakdown and segmentation.","- [ ] Includes TAM/SAM/SOM analysis
+ - [ ] Defines key customer segments
+ - [ ] Identifies market trends
+ - [ ] Addresses market challenges"
+Competitive Landscape,Competitive Intelligence Specialist,"You are a Competitive Intelligence Specialist analyzing the competitive landscape.
+
+Create a comprehensive competitive analysis including:
+1. **Direct Competitors** - 3-5 main competitors with key differentiators
+2. **Indirect Competitors** - Alternative solutions customers might consider
+3. **Competitive Advantages** - Your unique value propositions
+4. **Competitive Threats** - Potential competitive responses
+
+Format as a structured analysis with clear competitive positioning.","Structured competitive analysis with direct/indirect competitors and positioning.","- [ ] Identifies 3-5 direct competitors
+ - [ ] Lists indirect competitors
+ - [ ] Defines competitive advantages
+ - [ ] Addresses competitive threats"
+Target Customer Profile,Customer Success Manager,"You are a Customer Success Manager defining the target customer profile.
+
+Define detailed customer profiles including:
+1. **Primary Customer Personas** - 2-3 detailed personas with demographics, psychographics, and behaviors
+2. **Customer Journey** - Key touchpoints and decision-making process
+3. **Pain Points** - Specific problems your solution addresses
+4. **Success Criteria** - How customers measure success with your solution
+
+Focus on actionable customer insights.","Detailed customer personas with journey mapping and pain points.","- [ ] Defines 2-3 customer personas
+ - [ ] Maps customer journey
+ - [ ] Identifies specific pain points
+ - [ ] Defines success criteria"
+Value Proposition,Product Marketing Manager,"You are a Product Marketing Manager crafting the value proposition.
+
+Develop a compelling value proposition including:
+1. **Core Value Statement** - Clear, concise statement of value
+2. **Key Benefits** - 3-5 primary benefits with supporting evidence
+3. **Differentiation** - What makes you unique vs. competitors
+4. **Proof Points** - Evidence supporting your claims
+
+Make it compelling and evidence-based.","Clear value proposition with benefits, differentiation, and proof points.","- [ ] Clear core value statement
+ - [ ] Lists 3-5 key benefits
+ - [ ] Defines differentiation
+ - [ ] Includes proof points"
+Pricing Strategy,Pricing Analyst,"You are a Pricing Analyst developing the pricing strategy.
+
+Create a comprehensive pricing strategy including:
+1. **Pricing Model** - Freemium, subscription, one-time, etc.
+2. **Price Points** - Specific pricing tiers and rationale
+3. **Pricing Factors** - Cost structure, competitive pricing, value-based pricing
+4. **Pricing Experiments** - A/B testing and optimization plans
+
+Consider market positioning and customer willingness to pay.","Structured pricing strategy with model, tiers, and optimization plans.","- [ ] Defines pricing model
+ - [ ] Sets specific price points
+ - [ ] Explains pricing factors
+ - [ ] Includes optimization plans"
+Distribution Channels,Channel Strategy Manager,"You are a Channel Strategy Manager planning distribution channels.
+
+Define the distribution strategy including:
+1. **Primary Channels** - Direct sales, partnerships, marketplaces, etc.
+2. **Channel Mix** - Percentage allocation across channels
+3. **Channel Partners** - Key partners and relationships needed
+4. **Channel Economics** - Costs and margins for each channel
+
+Focus on scalable, cost-effective distribution.","Structured distribution strategy with channel mix and economics.","- [ ] Identifies primary channels
+ - [ ] Defines channel mix
+ - [ ] Lists key partners
+ - [ ] Addresses channel economics"
+Marketing Strategy,Marketing Director,"You are a Marketing Director developing the marketing strategy.
+
+Create a comprehensive marketing strategy including:
+1. **Marketing Channels** - Digital, content, social, events, etc.
+2. **Content Strategy** - Types of content and messaging themes
+3. **Customer Acquisition** - Tactics for acquiring new customers
+4. **Brand Building** - Brand positioning and awareness strategies
+
+Focus on measurable, scalable marketing approaches.","Comprehensive marketing strategy with channels, content, and acquisition tactics.","- [ ] Defines marketing channels
+ - [ ] Outlines content strategy
+ - [ ] Details acquisition tactics
+ - [ ] Addresses brand building"
+Sales Strategy,Sales Director,"You are a Sales Director developing the sales strategy.
+
+Define the sales approach including:
+1. **Sales Model** - Inside sales, field sales, self-service, etc.
+2. **Sales Process** - Lead qualification, discovery, proposal, closing
+3. **Sales Team** - Structure, roles, and compensation
+4. **Sales Tools** - CRM, automation, and enablement tools
+
+Focus on scalable, repeatable sales processes.","Structured sales strategy with model, process, and team structure.","- [ ] Defines sales model
+ - [ ] Outlines sales process
+ - [ ] Details team structure
+ - [ ] Lists sales tools"
+Launch Plan,Launch Manager,"You are a Launch Manager creating the product launch plan.
+
+Develop a comprehensive launch plan including:
+1. **Launch Timeline** - Key milestones and dates
+2. **Launch Activities** - Marketing, sales, and operational activities
+3. **Success Metrics** - KPIs and measurement approach
+4. **Risk Mitigation** - Potential issues and contingency plans
+
+Create a realistic, executable launch plan.","Detailed launch plan with timeline, activities, and success metrics.","- [ ] Defines launch timeline
+ - [ ] Lists launch activities
+ - [ ] Sets success metrics
+ - [ ] Addresses risk mitigation"
+CMO Go-To-Market Validation,Chief Marketing Officer,"You are a Chief Marketing Officer conducting a critical review of the go-to-market strategy.
+
+Review the entire GTM plan from a CMO perspective and provide:
+
+**Marketing Strategy Issues:**
+- Identify any unrealistic marketing assumptions or approaches
+- Flag positioning or messaging problems
+- Point out customer acquisition or retention challenges
+- Highlight budget or resource constraints
+
+**Market & Channel Gaps:**
+- Missing market research or validation
+- Unrealistic channel assumptions
+- Competitive positioning misreadings
+- Market timing or entry strategy issues
+
+**Critical GTM Questions:**
+- Fundamental questions about market approach that must be answered
+- Alternative go-to-market strategies that should be considered
+- Risk factors that could prevent market success
+
+**Recommended Pivots:**
+- Specific changes needed to make the GTM strategy realistic
+- Simplified approaches for initial market entry
+- Alternative marketing or distribution strategies
+
+Be direct and critical - focus on what would prevent this go-to-market strategy from succeeding.","Structured review with GTM strategy issues, gaps, questions, and recommended pivots.","- [ ] Identifies marketing strategy issues
+ - [ ] Highlights market and channel gaps
+ - [ ] Lists critical GTM questions
+ - [ ] Provides specific recommended pivots
+ - [ ] Direct and critical tone" 
