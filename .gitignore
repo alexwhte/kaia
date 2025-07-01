@@ -3,6 +3,10 @@
 
 # My idea input
 forager_ig_input.txt
+output
+
+# Old/backup files
+old/
 
 # Python
 __pycache__/

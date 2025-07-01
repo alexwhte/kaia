@@ -1,10 +1,10 @@
-# PRD Auto: Automated Product Requirements & Technical Planning Tool
+# Kaia: Automated Product Requirements & Technical Planning Tool
 
-PRD Auto is a unified command-line tool that generates Product Requirements Documents (PRD), Technical Specifications, Action Plans, Milestone Specifications, and Go-To-Market Plans from your product idea using OpenAI's GPT-4.
+Kaia is a unified command-line tool that generates Product Requirements Documents (PRD), Technical Specifications, Action Plans, Milestone Specifications, and Go-To-Market Plans from your product idea using OpenAI's GPT-4.
 
 ## Overview
 
-PRD Auto is designed as part of a broader automation pipeline that transforms product ideas into actionable development tasks:
+Kaia is designed as part of a broader automation pipeline that transforms product ideas into actionable development tasks:
 
 1. **Product Idea** → **PRD** (business requirements and user needs)
 2. **PRD** → **Technical Specification** (system architecture and technical requirements)
@@ -17,7 +17,7 @@ This pipeline ensures that your product vision flows seamlessly from high-level 
 ## Project Structure
 
 ```
-prd_auto/
+kaia/
 ├── scripts/                    # Python automation scripts
 │   ├── prd_auto.py            # Generate PRD from text input
 │   ├── spec_auto.py           # Generate Technical Spec from PRD
@@ -46,7 +46,7 @@ prd_auto/
 ```bash
 # Clone the repository
 git clone <your-repo-url>
-cd prd_auto
+cd kaia
 
 # Install dependencies
 pip install -r requirements.txt
@@ -60,7 +60,7 @@ echo "OPENAI_API_KEY=your_api_key_here" > .env
 
 ### Usage: The `kaia` Command
 
-PRD Auto provides a single command with subcommands for each step of the workflow:
+Kaia provides a single command with subcommands for each step of the workflow:
 
 #### **Full Pipeline (default)**
 ```bash
