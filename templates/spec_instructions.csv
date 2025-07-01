@@ -1,59 +1,67 @@
 Section,Role Emulated,Prompt Instruction,Output Format,Acceptance Criteria
 Purpose & Scope,Technical Product Manager,"You are a Technical Product Manager writing the Purpose & Scope section of a Technical Specification.
- 
 
- Write a clear, concise scope definition that's easy to read and inspiring. Use bullet points for better readability.
+Write a clear, concise scope definition that's direct and practical for developers. Use bullet points for better readability.
 
- Include:
- • What's IN scope (2-3 key bullet points)
- • What's OUT of scope (1-2 bullet points) 
- • How this connects to the PRD goals
- • Key technical constraints
+Include:
+• What's IN scope (2-3 key bullet points)
+• What's OUT of scope (1-2 bullet points) 
+• Key technical constraints
 
- Keep it under 200 words. Use a confident but approachable tone - avoid overly formal language like 'aforementioned' or 'thereby'. Make it feel exciting and achievable.","Clear scope with bullet points and inspiring tone.","- [ ] ≤200 words
+Keep it under 150 words. Use a direct, technical tone - avoid marketing language or overly inspiring statements. Focus on what needs to be built, not how amazing it will be.","Clear scope with bullet points and direct technical tone.","- [ ] ≤150 words
  - [ ] Uses bullet points for readability
- - [ ] Confident but approachable tone
- - [ ] No overly formal language
+ - [ ] Direct technical tone
+ - [ ] No marketing or inspiring language
  - [ ] Clear in/out scope definition"
 High-Level Architecture Diagram,Senior Software Architect,"You are a Senior Software Architect creating a High-Level Architecture Diagram section.
- 
 
- Create a textual architecture diagram that shows:
- 1. Major system components (frontend, backend, databases, external APIs)
- 2. Data flow between components
- 3. Key technologies/libraries for each component
- 4. Clear component boundaries and interfaces
+Create a Mermaid architecture diagram that shows:
+1. Major system components (frontend, backend, databases, external APIs)
+2. Basic connections between components
 
- Use ASCII art or structured text format. Keep it simple but comprehensive.","Textual architecture diagram with component descriptions.","- [ ] Shows all major components
- - [ ] Includes data flow
- - [ ] Lists key technologies
- - [ ] Clear component boundaries"
+Use Mermaid syntax for proper diagramming. Keep it simple and focused on the high-level system structure. Do not include data flow details (those go in the Data Flow section) or key technologies (those go in the Key Components section).
+
+Focus on showing the overall system architecture clearly.
+
+**IMPORTANT:** After the diagram, provide a bullet-point description explaining the architecture in easy-to-read format.","Mermaid architecture diagram showing major components and connections, followed by bullet-point description.","- [ ] Uses Mermaid syntax
+ - [ ] Shows all major components
+ - [ ] Shows basic connections
+ - [ ] No data flow details
+ - [ ] No key technologies listed
+ - [ ] Clean and simple structure
+ - [ ] Bullet-point description provided"
 Data Flow & Sequence Diagrams,Systems Engineer,"You are a Systems Engineer creating Data Flow & Sequence Diagrams.
- 
 
- Create 2-3 key sequence diagrams showing:
- 1. Main user journey flow
- 2. Data processing pipeline
- 3. External API interactions
+Create ONE comprehensive sequence diagram that shows the complete user journey and data flow from start to finish. This should include:
+- User interaction with the app
+- API calls to external services
+- Data processing steps
+- Storage operations
+- Any key decision points or error handling
 
- Use Mermaid syntax for proper diagramming. Focus on the most critical flows.","Mermaid sequence diagrams with proper syntax.","- [ ] Uses Mermaid syntax
- - [ ] Covers main user flows
- - [ ] Shows data processing steps
- - [ ] Includes API interactions"
+Use Mermaid syntax for proper diagramming. Focus on the most critical end-to-end flow that best represents how the product works.
+
+**IMPORTANT:** After the diagram, provide a bullet-point description explaining the flow in easy-to-read format.","Single comprehensive Mermaid sequence diagram showing complete user journey and data flow, followed by bullet-point description.","- [ ] Uses Mermaid syntax
+ - [ ] Single comprehensive diagram
+ - [ ] Shows complete user journey
+ - [ ] Includes key data processing steps
+ - [ ] Covers main API interactions
+ - [ ] Bullet-point description provided"
 Key Components,Lead Software Engineer,"You are a Lead Software Engineer defining Key Components.
  
 
- Create a detailed table with columns: Component | Responsibility | Technology/Libraries | Owner
+ Create a detailed table with columns: Component | Responsibility | Technology/Libraries | Owner | Boundaries (where needed)
  Include 6-8 major components covering:
  - Frontend components
  - Backend services
  - Data processing modules
  - External integrations
 
- Keep each description concise but specific.","Markdown table with 6-8 components.","- [ ] 6-8 components minimum
+ Keep each description concise but specific. Only add boundaries for components where the interface/contract is important to define.","Markdown table with 6-8 components including boundaries where needed.","- [ ] 6-8 components minimum
  - [ ] Covers all major system parts
  - [ ] Clear responsibilities
- - [ ] Specific technologies listed"
+ - [ ] Specific technologies listed
+ - [ ] Boundaries defined where important"
 External Integrations & APIs,API Integration Specialist,"You are an API Integration Specialist documenting External Integrations & APIs.
  
 
@@ -83,7 +91,7 @@ Data Models & Schemas,Data Architect,"You are a Data Architect defining Data Mod
  - [ ] Includes field types
  - [ ] Shows constraints
  - [ ] Clear relationships"
-Data Processing & LLM Logic,Data Engineer,"You are a Data Engineer writing the Data Processing & LLM Logic section.
+Data Processing Logic,Data Engineer,"You are a Data Engineer writing the Data Processing & LLM Logic section.
 
 Analyze the product requirements and define the appropriate data processing pipeline:
 
@@ -94,99 +102,62 @@ Analyze the product requirements and define the appropriate data processing pipe
 
 **Data Processing Pipeline:**
 - If the system processes raw media (audio, video, images), define how it gets converted to structured text:
-  - Speech-to-text engines (Whisper, Google Speech-to-Text) for audio content
-  - OCR tools (Tesseract, cloud OCR) for text extraction from images/video frames
+  - Speech-to-text engines for audio content
+  - OCR tools for text extraction from images/video frames
   - Video frame extraction and processing for visual content
 - If the system processes text directly, define the text preprocessing steps
 - If the system integrates with external APIs, define how data is extracted and validated
 - Consider fallback approaches when APIs don't provide required data directly
-
-**LLM Processing:**
-- How to use LLMs (default: GPT-4) to extract structured data from the processed content
-- Prompt engineering for extracting specific information relevant to the product
-- Data validation and cleaning of extracted information
-- Error handling for cases where extraction fails or is unclear
-- Alternative LLM options (Claude, Gemini, etc.) for future flexibility
+- Use LLMs where they add clear value (e.g., extracting structured data from unstructured text, natural language understanding). But for simple data extraction or validation, consider rule-based approaches first
+- When LLMs are needed, specify the use case and which model makes sense (GPT-4, Claude, Gemini, etc.). Include prompt engineering strategies for specific extraction tasks
+- Consider cost and performance implications of LLM usage
 
 **Data Unification (if multiple sources):**
 - How to combine and validate data from multiple sources
 - Conflict resolution when different sources provide conflicting information
-- Quality scoring and confidence levels for extracted data
 
-Keep it practical and tailored to the specific product requirements. Only include multimodal processing if the product actually needs it.","Intelligent data processing pipeline that adapts to the specific product requirements.","- [ ] Analyzes input data requirements
+Keep it practical and tailored to the specific product requirements. Don't force LLM usage where simpler approaches work better.","Intelligent data processing pipeline that uses appropriate tools for each task.","- [ ] Analyzes input data requirements
  - [ ] Defines appropriate processing pipeline
- - [ ] Includes multimodal processing only when needed
- - [ ] Covers LLM processing approach
- - [ ] Addresses data unification if applicable
- - [ ] Practical and tailored to product"
+ - [ ] Uses LLMs only where they add value
+ - [ ] Considers simpler alternatives first
+ - [ ] Practical and cost-effective approach"
 Edge-Case & Error Handling,DevOps Engineer,"You are a DevOps Engineer defining Edge-Case & Error Handling.
  
 
- Create a comprehensive table with columns: Scenario | Expected Response | Retry Strategy | Alert/Logging
- Cover critical scenarios:
+ Create a table with columns: Scenario | Expected Response | Retry Strategy | Alert/Logging
+ Cover the most critical scenarios, for example these types of failures:
  - Network failures
  - API rate limits
  - Data validation errors
  - Partial data scenarios
- - Security incidents
 
  Include specific handling strategies for each case.","Markdown table with error scenarios.","- [ ] Covers critical scenarios
  - [ ] Specific responses defined
  - [ ] Retry strategies included
  - [ ] Alert mechanisms specified"
 Non-Functional Requirements,Performance Engineer,"You are a Performance Engineer defining Non-Functional Requirements.
- 
 
- Specify quantitative requirements for:
- 1. Performance (response times, throughput)
- 2. Scalability (concurrent users, data volume)
- 3. Availability (uptime, SLA)
- 4. Security (encryption, compliance)
- 5. Monitoring (metrics, alerting)
+Specify quantitative requirements for:
+1. Performance (response times, throughput)
+2. Scalability (concurrent users, data volume)
+3. Availability (uptime, SLA)
+4. Security (encryption, compliance)
 
- Use specific metrics and targets.","Quantitative non-functional requirements.","- [ ] Specific performance targets
+Use specific metrics and targets. Focus on MVP minimums.","Quantitative non-functional requirements.","- [ ] Specific performance targets
  - [ ] Scalability metrics defined
  - [ ] Availability SLAs set
  - [ ] Security requirements listed"
-Security & Privacy,Backend Engineer,"You are a Backend Engineer writing the Security & Privacy section.
-
-Focus on practical, essential security measures that are actually needed for this project:
-
-1. **Basic Authentication** - How users will log in (OAuth, email/password, etc.)
-2. **Data Protection** - How sensitive data is handled (encryption, secure storage)
-3. **API Security** - How external API calls are secured (API keys, rate limiting)
-4. **User Privacy** - Basic privacy considerations (what data is collected, user consent)
-
-Keep it concise and practical. Avoid over-engineering with complex compliance frameworks unless specifically required.
-
-Format as a clear, structured list with brief explanations.","Structured list of essential security measures with brief explanations.","- [ ] Covers basic authentication
- - [ ] Addresses data protection
- - [ ] Includes API security
- - [ ] Mentions user privacy
- - [ ] Practical and concise
- - [ ] No over-engineering"
-Quality Assurance & Monitoring,QA Lead,"You are a QA Lead creating a Quality Assurance & Monitoring section.
-
-Create a concise table covering:
-1. Key testing types (Unit, Integration, Performance)
-2. Basic monitoring metrics and alerts
-3. Quality gates and validation criteria
-
-Keep it focused on MVP needs.","Markdown table with QA and monitoring essentials.","- [ ] Covers essential testing
-- [ ] Basic monitoring defined
-- [ ] Quality gates specified"
 Implementation Roadmap,Technical Product Manager,"You are a Technical Product Manager creating an Implementation Roadmap.
- 
 
- Create a table mapping PRD User Requirements to technical implementation details:
- Columns: PRD Requirement | Technical Implementation | Subtasks | MVP Priority (Yes/No)
+Create a table mapping PRD User Requirements to technical implementation details:
+Columns: PRD Requirement | Technical Implementation | Subtasks | MVP Priority (Yes/No)
 
- For each PRD requirement, specify:
- - How it will be implemented technically
- - Key subtasks needed
- - Whether it's MVP or can come later
+For each PRD requirement, specify:
+- How it will be implemented technically
+- Key subtasks needed
+- Whether it's MVP or can come later
 
- Focus on being succinct and actionable.","Markdown table mapping PRD requirements to implementation.","- [ ] Maps all PRD requirements
+Focus on being succinct and actionable.","Markdown table mapping PRD requirements to implementation.","- [ ] Maps all PRD requirements
  - [ ] Clear technical implementation
  - [ ] Identifies subtasks
  - [ ] MVP priority marked"

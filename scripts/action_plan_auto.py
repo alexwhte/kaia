@@ -18,10 +18,11 @@ def extract_critical_sections(content, content_type):
         critical_sections = [
             "Purpose & Scope",
             "High-Level Architecture Diagram", 
+            "Data Flow & Sequence Diagrams",
             "Key Components",
             "External Integrations & APIs",
             "Data Models & Schemas",
-            "Non-Functional Requirements"        ]
+            "Implementation Roadmap"        ]
         
         extracted_content = []
         lines = content.split('\n')

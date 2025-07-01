@@ -152,7 +152,14 @@ with open(args.output, "w") as out_file:
         # Skip validation sections in the spec output - they go to validation file only
         if "Validation" in section or "CTO" in section:
             continue
-        out_file.write(f"## {section}\n\n{content}\n\n")
+        
+        # Check if content already has the section title
+        if content.strip().startswith(f"## {section}"):
+            # Content already has the title, just write it as is
+            out_file.write(f"{content}\n\n")
+        else:
+            # Add the section title
+            out_file.write(f"## {section}\n\n{content}\n\n")
 
 # Generate action plan if requested
 if args.generate_action_plan:
