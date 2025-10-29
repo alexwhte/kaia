@@ -127,7 +127,7 @@ Keep it under 300 words total. Be specific enough to identify real technical cha
 Appendix - Competitor Analysis,Product Marketing Manager,"Generate the **Appendix – Competitor Analysis** section for a PRD about [PRODUCT_NAME].
  
 
- Competitor Matrix' – markdown table with: Platform, Core Focus, AI Capabilities, Personalization, Coverage Scope, Pricing Model, Strengths, Limitations, Alignment with Forager's Vision",Markedown table with competitors,- [ ] Matrix has ≥5 competitors
+ Competitor Matrix' – markdown table with: Platform, Core Focus, AI Capabilities, Personalization, Coverage Scope, Pricing Model, Strengths, Limitations, Alignment with Vision",Markedown table with competitors,- [ ] Matrix has ≥5 competitors
 Appendix - Validation Findings & Decisions,Product Manager,"You are a Product Manager documenting validation findings and decisions from executive reviews.
 
 Create a focused summary of validation feedback including:

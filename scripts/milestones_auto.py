@@ -43,13 +43,11 @@ def extract_critical_sections(content, content_type):
     """Extract only the most critical sections for milestone generation"""
     
     if content_type == "tech_spec":
-        # Critical sections for milestone generation
+        # Minimal set for unique, testable milestones
         critical_sections = [
-            "Purpose & Scope",
-            "High-Level Architecture Diagram", 
             "Key Components",
+            "Data Flow & Sequence Diagrams",
             "Data Models & Schemas",
-            "External Integrations & APIs",
             "Implementation Roadmap"
         ]
         
@@ -73,12 +71,10 @@ def extract_critical_sections(content, content_type):
         
         return '\n'.join(extracted_content)
     
-    elif content_type == "action_plan":
-        # Critical sections for milestone generation
+    elif content_type == "prd":
+        # Minimal set for unique, testable milestones
         critical_sections = [
-            "Critical Unknowns & Validations",
-            "Guiding Principles", 
-            "Milestones"
+            "User Requirements"
         ]
         
         extracted_content = []
@@ -103,30 +99,26 @@ def extract_critical_sections(content, content_type):
     
     return content
 
-def generate_comprehensive_milestone_specs(client, tech_spec_content, action_plan_content):
+def generate_comprehensive_milestone_specs(client, tech_spec_content, prd_content):
     """Generate comprehensive milestone specifications using OpenAI API"""
     
     # Extract only critical sections to reduce token usage
     critical_tech_spec = extract_critical_sections(tech_spec_content, "tech_spec")
-    critical_action_plan = extract_critical_sections(action_plan_content, "action_plan")
+    critical_prd = extract_critical_sections(prd_content, "prd")
     
     print(f"📊 Token optimization:")
     print(f"   Technical Spec: {len(tech_spec_content.split())} words → {len(critical_tech_spec.split())} words")
-    print(f"   Action Plan: {len(action_plan_content.split())} words → {len(critical_action_plan.split())} words")
+    print(f"   PRD: {len(prd_content.split())} words → {len(critical_prd.split())} words")
     
-    prompt = f"""You are an expert Technical Lead creating detailed milestone specifications for developers and AI agents.
+    prompt = f"""You are an expert Technical Lead creating milestone specifications for developers.
 
-TECHNICAL SPECIFICATION (Critical Sections Only):
+TECHNICAL SPECIFICATION:
 {critical_tech_spec}
 
-ACTION PLAN (Critical Sections Only):
-{critical_action_plan}
+PRODUCT REQUIREMENTS:
+{critical_prd}
 
-Create a comprehensive milestone specification document with this structure:
-
-# Milestone Specifications
-
-For each milestone in the action plan, create:
+Create 3-6 logical development milestones with this structure for each:
 
 ## [MILESTONE_NAME]
 
@@ -138,31 +130,18 @@ For each milestone in the action plan, create:
 ### Implementation Guide
 - Step-by-step implementation
 - Code structure decisions
-- Error handling and edge cases
-
-### Code Structure
-- File organization and naming conventions
-- Key interfaces and contracts
-- Dependencies and imports
+- Error handling
 
 ### Testing & Validation
 - Unit test requirements
 - Integration test scenarios
-- Acceptance criteria validation
+- Acceptance criteria
 
 ### Dependencies & Prerequisites
 - External services and APIs
 - Internal system dependencies
-- Environment setup requirements
 
-For each milestone:
-1. Extract the goal, key tasks, deliverables, and exit tests from the action plan
-2. Enrich with specific technical implementation details from the technical spec
-3. Focus on WHAT to build and HOW to build it
-4. Make it detailed enough for a developer to implement without questions
-5. Include specific API endpoints, data models, database changes, and code structure
-
-Do NOT include high-level context that belongs in the master spec. Each milestone should be a focused, actionable technical specification for building that specific phase."""
+Focus on WHAT to build and HOW to build it. Make each milestone actionable for developers."""
 
     try:
         response = client.chat.completions.create(
@@ -172,7 +151,7 @@ Do NOT include high-level context that belongs in the master spec. Each mileston
                 {"role": "user", "content": prompt}
             ],
             temperature=0.7,
-            max_tokens=6000
+            max_tokens=3000
         )
         return response.choices[0].message.content
     except Exception as e:
@@ -180,9 +159,9 @@ Do NOT include high-level context that belongs in the master spec. Each mileston
         return None
 
 def main():
-    parser = argparse.ArgumentParser(description='Generate comprehensive milestone specifications from Technical Specification and Action Plan')
+    parser = argparse.ArgumentParser(description='Generate comprehensive milestone specifications from Technical Specification and PRD')
     parser.add_argument('tech_spec_file', help='Path to Technical Specification markdown file')
-    parser.add_argument('--action-plan-file', help='Path to Action Plan file (optional)')
+    parser.add_argument('--prd-file', help='Path to PRD file (optional)')
     parser.add_argument('--milestone', help='Specific milestone to generate (e.g., "Milestone 1 - Core Authentication")')
     parser.add_argument('--description', help='Description for the milestone (required if --milestone is used)')
     parser.add_argument('-o', '--output', default='output/milestone_specs.md', 
@@ -216,42 +195,25 @@ def main():
         print(f"Error reading technical specification file: {e}")
         sys.exit(1)
     
-    # Determine action plan content
-    if args.action_plan_file:
+    # Determine PRD content
+    if args.prd_file:
         try:
-            with open(args.action_plan_file, 'r', encoding='utf-8') as file:
-                action_plan_content = file.read().strip()
+            with open(args.prd_file, 'r', encoding='utf-8') as file:
+                prd_content = file.read().strip()
         except FileNotFoundError:
-            print(f"Error: Action plan file '{args.action_plan_file}' not found")
+            print(f"Error: PRD file '{args.prd_file}' not found")
             sys.exit(1)
         except Exception as e:
-            print(f"Error reading action plan file: {e}")
+            print(f"Error reading PRD file: {e}")
             sys.exit(1)
     else:
-        # Use default milestone structure if no action plan provided
-        action_plan_content = """
-## Milestones
+        # Use minimal context if no PRD provided
+        prd_content = """
+## Product Overview
+Basic product requirements for milestone generation.
 
-<!-- MILESTONE_START -->
-## Milestone 1 - Core Infrastructure
-
-**Goal:** Set up basic project structure, database, and core infrastructure
-
-**Key Tasks:**
-- Initialize project structure
-- Set up database schema
-- Configure development environment
-
-**Deliverables:**
-- Working development environment
-- Basic database schema
-- Project structure
-
-**Exit Tests:**
-- Environment can be set up successfully
-- Database connections work
-- Basic functionality tests pass
-<!-- MILESTONE_END -->
+## User Requirements
+Core user needs and functionality requirements.
 """
     
     # Generate comprehensive milestone specifications
@@ -260,7 +222,7 @@ def main():
     milestone_specs = generate_comprehensive_milestone_specs(
         client, 
         tech_spec_content, 
-        action_plan_content
+        prd_content
     )
     
     if not milestone_specs:

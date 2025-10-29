@@ -28,14 +28,21 @@ kaia/
 ├── templates/                  # Templates and instructions
 │   ├── prd_instructions.csv   # PRD generation template
 │   ├── spec_instructions.csv  # Technical spec generation template
-│   └── action_plan_template.md # Action plan generation template
+│   └── gtm_instructions.csv   # GTM plan generation template
 ├── tests/                      # Test files
 │   └── test_action_plan.py    # Action plan script tests
-├── kaia                        # Unified CLI entry point
 ├── output/                    # Generated documents (auto-created)
+│   └── archive/               # Historical versions of generated documents
+├── old/                       # Legacy files and previous versions
+├── kaia                       # Unified CLI entry point
+├── run.sh                     # Alternative execution script
+├── setup_alias.sh             # CLI alias setup script
 ├── requirements.txt           # Python dependencies
+├── tuning.txt                 # AI model tuning parameters and notes
+├── forager_ig_input.txt       # Example input file for Forager project
 ├── .env                       # Environment variables (create this)
 ├── .gitignore                 # Git ignore rules
+├── LICENSE                    # Project license
 └── README.md                  # This file
 ```
 
@@ -110,23 +117,29 @@ Kaia provides a single command with subcommands for each step of the workflow:
 - `--version 1` — Add a custom version suffix to output files
 - `--skip-prd`, `--skip-spec`, `--skip-action-plan`, `--skip-milestones`, `--skip-gtm` — Skip steps (for `all` pipeline only)
 
-### Run Individual Scripts
+### Alternative Execution Methods
 
+#### **Using run.sh**
+```bash
+./run.sh "Build a social media app for photographers"
+```
+
+#### **Using Individual Scripts Directly**
 ```bash
 # Generate PRD only
-./kaia prd "Build a social media app for photographers"
+python scripts/prd_auto.py "Build a social media app for photographers"
 
 # Generate Technical Spec from existing PRD
-./kaia techspec output/prd_v1.md
+python scripts/spec_auto.py output/prd_v1.md
 
 # Generate Action Plan from existing Technical Spec
-./kaia actionplan output/tech_spec_v1.md --prd-file output/prd_v1.md
+python scripts/action_plan_auto.py output/tech_spec_v1.md --prd-file output/prd_v1.md
 
 # Generate Milestone Specifications
-./kaia milestones output/tech_spec_v1.md --action-plan-file output/action_plan_v1.md
+python scripts/milestones_auto.py output/tech_spec_v1.md --action-plan-file output/action_plan_v1.md
 
 # Generate Go-To-Market Plan
-./kaia gtm output/prd_v1.md
+python scripts/gtm_auto.py output/prd_v1.md
 ```
 
 ## Output Files
@@ -139,17 +152,22 @@ All generated files are saved in the `output/` directory with versioned naming:
 - `milestone_specs_v1.md` - Detailed milestone specifications for developers
 - `gtm_plan_v1.md` - Go-To-Market Plan
 
+### Archive System
+
+The `output/archive/` directory automatically stores historical versions of generated documents, allowing you to track changes and iterations over time. Each run creates timestamped versions for easy reference.
+
 ## Features
 
 - **Unified CLI**: One command for the full pipeline or any step
 - **Automated Pipeline**: Generate all documents in sequence
-- **Version Control**: Automatic timestamp-based versioning
+- **Version Control**: Automatic timestamp-based versioning with archive system
 - **Flexible Input**: Support for any text-formatted product idea
 - **Modular Design**: Run individual steps or the complete pipeline
 - **Action Planning**: Includes setup checklists and milestone breakdown
 - **Milestone Specifications**: Detailed technical specs for each development phase
 - **Go-To-Market Planning**: Marketing strategy and launch planning
 - **Clean Output**: Professional markdown formatting
+- **Historical Tracking**: Automatic archiving of all generated documents
 
 ## Templates
 
@@ -158,19 +176,26 @@ The tool uses templates located in the `templates/` folder:
 ### CSV Templates
 1. **templates/prd_instructions.csv** - Defines PRD sections and generation prompts
 2. **templates/spec_instructions.csv** - Defines technical specification sections and prompts
+3. **templates/gtm_instructions.csv** - Defines go-to-market plan sections and prompts
 
 ### Markdown Templates
-3. **templates/action_plan_template.md** - Defines the action plan generation prompt with structured milestone markers
+4. **templates/action_plan_template.md** - Defines the action plan generation prompt with structured milestone markers
 
 You can customize these templates to match your specific needs.
 
-## Environment Variables
+## Configuration
+
+### Environment Variables
 
 Create a `.env` file in the project root:
 
 ```
 OPENAI_API_KEY=your_openai_api_key_here
 ```
+
+### Tuning Parameters
+
+The `tuning.txt` file contains AI model parameters and notes for optimizing generation quality. You can modify these settings to adjust the output style and detail level.
 
 ## Dependencies
 
@@ -203,6 +228,21 @@ Install with: `pip install -r requirements.txt`
 ./kaia all "Build a social media app for photographers" --skip-prd --skip-spec
 ```
 
+### Using Input Files
+```bash
+# Use a text file as input
+./kaia prd forager_ig_input.txt
+```
+
+## Example Project
+
+The repository includes an example project for "Forager" - an Instagram reel parsing app for travelers. You can examine the generated documents in the `output/` directory to see the quality and structure of Kaia's output:
+
+- `output/prd.md` - Forager Product Requirements Document
+- `output/tech_spec_v7.md` - Forager Technical Specification
+- `output/forager_action_plan.md` - Forager Action Plan
+- `output/forager_milestones.md` - Forager Milestone Specifications
+
 ## Next Steps
 
 After generating your documents:
@@ -220,3 +260,16 @@ After generating your documents:
 - **Token Limits**: The scripts are optimized to handle large documents efficiently
 - **File Not Found**: Make sure input files exist and paths are correct
 - **Permission Issues**: Ensure the CLI script is executable (`chmod +x kaia`)
+- **Archive Issues**: Check that the `output/archive/` directory exists and is writable
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests if applicable
+5. Submit a pull request
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

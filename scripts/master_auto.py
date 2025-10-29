@@ -8,6 +8,7 @@ import os
 import sys
 import argparse
 import subprocess
+import tempfile
 from pathlib import Path
 from datetime import datetime
 
@@ -94,19 +95,34 @@ def main():
     
     # Track generated files for next steps
     generated_files = {}
+    temp_files = []  # Track temporary files for cleanup
+    
+    # Check if product_idea is a file path or raw text
+    product_idea_input = Path(args.product_idea)
+    if not product_idea_input.exists() or not product_idea_input.is_file():
+        # It's raw text, create a temporary file
+        temp_file = tempfile.NamedTemporaryFile(mode='w', suffix='.txt', delete=False)
+        temp_file.write(args.product_idea)
+        temp_file.close()
+        product_idea_input = Path(temp_file.name)
+        temp_files.append(product_idea_input)
     
     # Step 1: Generate PRD
     if not args.skip_prd:
         prd_output = output_dir / f"prd_{args.version}.md"
         success = run_script(
             "prd_auto.py",
-            [args.product_idea, "-o", str(prd_output)],
+            [str(product_idea_input), "--output", str(prd_output)],
             "PRD Generation"
         )
         if success:
             generated_files['prd'] = prd_output
         else:
             print("❌ PRD generation failed. Stopping pipeline.")
+            # Clean up temp files
+            for temp_file in temp_files:
+                if temp_file.exists():
+                    temp_file.unlink()
             sys.exit(1)
     else:
         print("⏭️  Skipping PRD generation")
@@ -118,14 +134,14 @@ def main():
             # Use PRD as input
             success = run_script(
                 "spec_auto.py",
-                [str(generated_files['prd']), "-o", str(spec_output)],
+                [str(generated_files['prd']), "--output", str(spec_output)],
                 "Technical Specification Generation"
             )
         else:
-            # Use product idea directly
+            # Use product idea directly (or temp file if it was raw text)
             success = run_script(
                 "spec_auto.py",
-                [args.product_idea, "-o", str(spec_output)],
+                [str(product_idea_input), "--output", str(spec_output)],
                 "Technical Specification Generation"
             )
         
@@ -144,14 +160,14 @@ def main():
             # Use both spec and PRD as input
             success = run_script(
                 "action_plan_auto.py",
-                [str(generated_files['spec']), "--prd-file", str(generated_files['prd']), "-o", str(action_plan_output)],
+                [str(generated_files['spec']), "--prd-file", str(generated_files['prd']), "--output", str(action_plan_output)],
                 "Action Plan Generation"
             )
         elif 'spec' in generated_files:
             # Use only spec as input
             success = run_script(
                 "action_plan_auto.py",
-                [str(generated_files['spec']), "-o", str(action_plan_output)],
+                [str(generated_files['spec']), "--output", str(action_plan_output)],
                 "Action Plan Generation"
             )
         else:
@@ -173,14 +189,14 @@ def main():
             # Use both spec and action plan as input
             success = run_script(
                 "milestones_auto.py",
-                [str(generated_files['spec']), "--action-plan-file", str(generated_files['action_plan']), "-o", str(milestone_output)],
+                [str(generated_files['spec']), "--action-plan-file", str(generated_files['action_plan']), "--output", str(milestone_output)],
                 "Milestone Specifications Generation"
             )
         elif 'spec' in generated_files:
             # Use only spec as input
             success = run_script(
                 "milestones_auto.py",
-                [str(generated_files['spec']), "-o", str(milestone_output)],
+                [str(generated_files['spec']), "--output", str(milestone_output)],
                 "Milestone Specifications Generation"
             )
         else:
@@ -202,14 +218,14 @@ def main():
             # Use PRD as input
             success = run_script(
                 "gtm_auto.py",
-                [str(generated_files['prd']), "-o", str(gtm_output)],
+                [str(generated_files['prd']), "--output", str(gtm_output)],
                 "Go-To-Market Plan Generation"
             )
         else:
-            # Use product idea directly
+            # Use product idea directly (or temp file if it was raw text)
             success = run_script(
                 "gtm_auto.py",
-                [args.product_idea, "-o", str(gtm_output)],
+                [str(product_idea_input), "--output", str(gtm_output)],
                 "Go-To-Market Plan Generation"
             )
         
@@ -235,6 +251,11 @@ def main():
             print(f"   ✅ {doc_type.upper()}: {file_path.name} ({size:,} bytes)")
         else:
             print(f"   ❌ {doc_type.upper()}: {file_path.name} (file not found)")
+    
+    # Clean up temporary files
+    for temp_file in temp_files:
+        if temp_file.exists():
+            temp_file.unlink()
     
     print(f"\n🚀 Next steps:")
     print(f"   1. Review the generated documents")

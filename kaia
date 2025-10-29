@@ -49,7 +49,7 @@ case "$subcommand" in
     echo "  kaia prd 'Build a social media app for photographers'"
     echo "  kaia techspec output/prd_v1.md"
     echo "  kaia actionplan output/tech_spec_v1.md --prd-file output/prd_v1.md"
-    echo "  kaia milestones output/tech_spec_v1.md --action-plan-file output/action_plan_v1.md"
+    echo "  kaia milestones output/tech_spec_v1.md --prd-file output/prd_v1.md"
     echo "  kaia gtm output/prd_v1.md"
     echo "  kaia all 'Build a social media app for photographers' --version 1"
     exit 1
