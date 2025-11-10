@@ -71,16 +71,15 @@ Kaia provides a single command with subcommands for each step of the workflow:
 
 #### **Full Pipeline (default)**
 ```bash
-./kaia "Build a social media app for photographers"
-# or
-./kaia all "Build a social media app for photographers"
+./kaia "FridgeFlow: People waste food because they forget what’s in their fridge or when it expires. FridgeFlow will use image recognition and barcode scanning to track ingredients and suggest recipes before items go bad. The app should look like a food dashboard with a “cook now” button that filters by what’s expiring soon."
+
 ```
-- **Input:** Product idea as text
+- **Input:** Product idea as text. 
 - **Output:** PRD, Technical Spec, Action Plan, Milestone Specs, and GTM Plan in the `output/` folder
 
 #### **Generate PRD only**
 ```bash
-./kaia prd "Build a social media app for photographers"
+./kaia prd "Build XYZ"
 ```
 - **Input:** Product idea as text
 - **Output:** PRD markdown file in `output/`
@@ -116,31 +115,6 @@ Kaia provides a single command with subcommands for each step of the workflow:
 #### **Options for All Commands**
 - `--version 1` — Add a custom version suffix to output files
 - `--skip-prd`, `--skip-spec`, `--skip-action-plan`, `--skip-milestones`, `--skip-gtm` — Skip steps (for `all` pipeline only)
-
-### Alternative Execution Methods
-
-#### **Using run.sh**
-```bash
-./run.sh "Build a social media app for photographers"
-```
-
-#### **Using Individual Scripts Directly**
-```bash
-# Generate PRD only
-python scripts/prd_auto.py "Build a social media app for photographers"
-
-# Generate Technical Spec from existing PRD
-python scripts/spec_auto.py output/prd_v1.md
-
-# Generate Action Plan from existing Technical Spec
-python scripts/action_plan_auto.py output/tech_spec_v1.md --prd-file output/prd_v1.md
-
-# Generate Milestone Specifications
-python scripts/milestones_auto.py output/tech_spec_v1.md --action-plan-file output/action_plan_v1.md
-
-# Generate Go-To-Market Plan
-python scripts/gtm_auto.py output/prd_v1.md
-```
 
 ## Output Files
 
@@ -180,7 +154,6 @@ The tool uses templates located in the `templates/` folder:
 
 ### Markdown Templates
 4. **templates/action_plan_template.md** - Defines the action plan generation prompt with structured milestone markers
-
 You can customize these templates to match your specific needs.
 
 ## Configuration
@@ -188,71 +161,20 @@ You can customize these templates to match your specific needs.
 ### Environment Variables
 
 Create a `.env` file in the project root:
-
 ```
 OPENAI_API_KEY=your_openai_api_key_here
 ```
 
 ### Tuning Parameters
-
 The `tuning.txt` file contains AI model parameters and notes for optimizing generation quality. You can modify these settings to adjust the output style and detail level.
 
 ## Dependencies
-
 - Python 3.7+
 - OpenAI Python client
 - pandas
 - python-dotenv
 
 Install with: `pip install -r requirements.txt`
-
-## Usage Examples
-
-### Full Pipeline
-```bash
-./kaia "Build a social media app for photographers"
-```
-
-### Individual Steps
-```bash
-./kaia prd "Build a social media app for photographers"
-./kaia techspec output/prd_v1.md
-./kaia actionplan output/tech_spec_v1.md --prd-file output/prd_v1.md
-./kaia milestones output/tech_spec_v1.md --action-plan-file output/action_plan_v1.md
-./kaia gtm output/prd_v1.md
-```
-
-### Skip Steps (Pipeline Only)
-```bash
-./kaia all "Build a social media app for photographers" --skip-gtm
-./kaia all "Build a social media app for photographers" --skip-prd --skip-spec
-```
-
-### Using Input Files
-```bash
-# Use a text file as input
-./kaia prd forager_ig_input.txt
-```
-
-## Example Project
-
-The repository includes an example project for "Forager" - an Instagram reel parsing app for travelers. You can examine the generated documents in the `output/` directory to see the quality and structure of Kaia's output:
-
-- `output/prd.md` - Forager Product Requirements Document
-- `output/tech_spec_v7.md` - Forager Technical Specification
-- `output/forager_action_plan.md` - Forager Action Plan
-- `output/forager_milestones.md` - Forager Milestone Specifications
-
-## Next Steps
-
-After generating your documents:
-
-1. Review the PRD for completeness and accuracy
-2. Use the Technical Specification to plan your architecture
-3. Follow the Action Plan's setup checklist
-4. Use the Milestone Specifications for detailed development planning
-5. Implement the Go-To-Market Plan for launch strategy
-6. Start with MVP features and iterate
 
 ## Troubleshooting
 
