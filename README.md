@@ -71,10 +71,10 @@ Kaia provides a single command with subcommands for each step of the workflow:
 
 #### **Full Pipeline (default)**
 ```bash
-./kaia "FridgeFlow: People waste food because they forget what’s in their fridge or when it expires. FridgeFlow will use image recognition and barcode scanning to track ingredients and suggest recipes before items go bad. The app should look like a food dashboard with a “cook now” button that filters by what’s expiring soon."
+./kaia "FridgeFlow: People waste food because they forget what’s in their fridge or when it expires. This mobile app will use image recognition and barcode scanning to track ingredients and suggest recipes. The app looks like a clean grocery dashboard with a “cook now” button that filters by what’s expiring soon."
 
 ```
-- **Input:** Product idea as text. 
+- **Input:** Product idea as text OR you may link a txt file.
 - **Output:** PRD, Technical Spec, Action Plan, Milestone Specs, and GTM Plan in the `output/` folder
 
 #### **Generate PRD only**
